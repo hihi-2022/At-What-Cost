@@ -1,11 +1,11 @@
 import React from 'react'
 
+import NavBar from './NavBar' 
+
 function App() {
   return (
     <>
-      <header className="header">
-        <h1>My Collection</h1>
-      </header>
+      <NavBar />
       <section className="main">{/* add your code here */}</section>
     </>
   )
