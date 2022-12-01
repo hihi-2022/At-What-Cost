@@ -49,10 +49,8 @@ function NavBar () {
  
     return (
         <div>
-          <div className="font-1">AWC</div>
-          <div className="font-2">AWC</div>
-          <div className="font-3">AWC</div>
-          <div className="font-4">AWC</div>
+          <div style={{fontFamily: 'Nova Round, cursive', fontSize: '45px', fontWeight: 'bold'}}>AWC</div>
+
             <label htmlFor="csvInput" style={{ display: "block" }}>
                 Enter CSV File
             </label>

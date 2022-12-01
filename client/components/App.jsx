@@ -3,9 +3,6 @@ import CostBreakdown from './CostBreakdown'
 import NavBar from './NavBar'
 import TransactionList from './TransactionList'
 import Welcome from './Welcome'
-
-import NavBar from './NavBar' 
-
 function App() {
   return (
     <>
