@@ -109,3 +109,6 @@ Make a feature branch when working on a user story. When finished with feature, 
 
 ---
 
+## 6. Wireframe
+
+![home page mockup](Home%20(lg).jpg)
