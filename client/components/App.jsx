@@ -1,19 +1,18 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import CostBreakdown from './CostBreakdown'
 import NavBar from './NavBar'
 import TransactionList from './TransactionList'
 import Welcome from './Welcome'
 
-// Example data for CostBreakdown and child components
-const totals = [
-  { category: 'Thing1', amount: 100, fill: 'red' },
-  { category: 'Thing2', amount: 1000, fill: 'blue' },
-  { category: 'Thing3', amount: 50, fill: 'green' },
-  { category: 'Thing4', amount: 25, fill: 'yellow' },
-  { category: 'Thing5', amount: 350, fill: 'cyan' },
-]
-
 function App() {
+  const categories = useSelector((globalState) => globalState.categories)
+
+  // Example data for CostBreakdown and child components
+  const totals = categories.map(item => {
+    return { category: item, amount: Math.floor(100 + Math.random() * 300), fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}` }
+  });
+
   return (
     <>
       <NavBar />
