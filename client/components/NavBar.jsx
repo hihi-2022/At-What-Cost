@@ -1,3 +1,4 @@
+
 import React, { useState } from "react"
 import Papa from "papaparse"
  
@@ -66,6 +67,5 @@ function NavBar () {
             </div>
         </div>
     )
-}
-
+  }
 export default NavBar
