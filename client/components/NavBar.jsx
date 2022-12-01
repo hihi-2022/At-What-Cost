@@ -32,6 +32,7 @@ function NavBar () {
             setFile(inputFile)
         }
     }
+    
     const handleParse = () => {
          
         if (!file) return setError("Enter a valid file")
@@ -46,13 +47,12 @@ function NavBar () {
               }
             )
               dispatch(receiveTransactionsAction(filteredData))
-
         }
         reader.readAsText(file)
     }
  
     return (
-        <div style={{backgroundColor: 'orange', width: '100%'}}>
+        <div>
           <div style={{fontFamily: 'Nova Round, cursive', fontSize: '45px', fontWeight: 'bold'}}>AWC</div>
 
             <label htmlFor="csvInput" style={{ display: "block" }}>
