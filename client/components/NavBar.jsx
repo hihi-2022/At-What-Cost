@@ -1,45 +1,58 @@
-import React, { useState } from 'react'
-import Papa from 'papaparse'
+import React, { useState } from "react"
+import Papa from "papaparse"
+ 
 
-const allowedExtensions = ["csv"];
+const allowedExtensions = ["csv"]
+ 
+function NavBar () {
+     
 
-function NavBar() {
+    const [data, setData] = useState([])
 
-  const [ csvData, setCsvData ] = useState([])
-  const [ error, setError] = useState("")
-  const [ file, setFile ] = useState("")
+    const [error, setError] = useState("")
+     
+    const [file, setFile] = useState("")
 
-  function handleFileChange (e) {
-    setError("")
-
-    if(e.target.files.length) {
-      const inputFile = e.target.files[0]
-
-      const fileExtension = inputFile?.type.split("/")[1]
-      if(!allowedExtensions.includes(fileExtension)) {
-        setError("Please input a csv file")
-        return 
-      }
-      setFile(inputFile)
+    const handleFileChange = (e) => {
+        setError("")
+         
+        if (e.target.files.length) {
+            const inputFile = e.target.files[0]
+             
+            const fileExtension = inputFile?.type.split("/")[1]
+            if (!allowedExtensions.includes(fileExtension)) {
+                setError("Please input a csv file")
+                return
+            }
+ 
+            setFile(inputFile)
+        }
     }
-  } 
+    const handleParse = () => {
+         
+        if (!file) return setError("Enter a valid file")
 
-  function handleParse () {
-    if(!file) return setError("Enter a valid file")
-    const reader = new FileReader()
+        const reader = new FileReader()
 
-    reader.onload = async ({ target }) => {
-      const csv = Papa.parse(target.result, { header: true });
-      const parsedData = csv?.data;
-      const columns = Object.keys(parsedData[0]);
-      setCsvData(columns);
-  }
-}
-
-  return (
-    <>
-        <h1>NavBar</h1> 
-        <label htmlFor="csvInput" style={{ display: "block" }}>
+        reader.onload = async ({ target }) => {
+            const csv = Papa.parse(target.result, { header: true })
+            const parsedData = csv?.data
+            const filteredData = parsedData.map(obj => {
+              return {Amount: obj.Amount, Date: obj.Date, Code: obj.Code, Type: obj.Type }
+            }
+              )
+            setData(filteredData)
+        }
+        reader.readAsText(file)
+    }
+ 
+    return (
+        <div>
+          <div className="font-1">AWC</div>
+          <div className="font-2">AWC</div>
+          <div className="font-3">AWC</div>
+          <div className="font-4">AWC</div>
+            <label htmlFor="csvInput" style={{ display: "block" }}>
                 Enter CSV File
             </label>
             <input
@@ -49,14 +62,10 @@ function NavBar() {
                 type="File"
             />
             <div>
-                <button onClick={handleParse}>Parse</button>
+                <button onClick={handleParse}>Submit</button>
             </div>
-            <div style={{ marginTop: "3rem" }}>
-                {error ? error : csvData.map((col,
-                  idx) => <div key={idx}>{col}</div>)}
-            </div>
-    </>
-  )
+        </div>
+    )
 }
 
 export default NavBar
