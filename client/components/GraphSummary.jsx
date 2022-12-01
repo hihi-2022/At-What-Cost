@@ -16,7 +16,7 @@ function GraphSummary({ totals }) {
             cy="50%"
             outerRadius={80}
             // fill="#8884d8"
-            // labelLine={false}
+            labelLine={false}
             label={(item) => item.category}
           />
           <Tooltip />
