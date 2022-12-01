@@ -33,7 +33,8 @@ function NavBar () {
     if (!file) return alert("Please enter a CSV file")
 
     const reader = new FileReader()
-
+    reader.readAsText(file)
+    
     reader.onload = async ({ target }) => {
       const csv = Papa.parse(target.result, { header: true })
       const parsedData = csv.data
@@ -43,7 +44,6 @@ function NavBar () {
       )
     dispatch(receiveTransactionsAction(filteredData))
     }
-    reader.readAsText(file)
   }
  
     return (
