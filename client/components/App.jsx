@@ -1,12 +1,27 @@
 import React from 'react'
+import CostBreakdown from './CostBreakdown'
+import NavBar from './NavBar'
+import TransactionList from './TransactionList'
+import Welcome from './Welcome'
 
 function App() {
   return (
     <>
+      <NavBar />
       <header className="header">
-        <h1>My Collection</h1>
+        <h1>App component: At what cost</h1>
       </header>
-      <section className="main">{/* add your code here */}</section>
+      <section className="main">
+        {
+          true ? 
+            <>
+              <TransactionList />
+              <CostBreakdown />
+            </>
+            :
+          <Welcome />
+        }
+      </section>
     </>
   )
 }
