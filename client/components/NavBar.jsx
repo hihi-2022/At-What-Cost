@@ -1,18 +1,21 @@
-
 import React, { useState } from "react"
+import { useDispatch } from 'react-redux'
 import Papa from "papaparse"
- 
+
+import {receiveTransactionsAction} from '../actions'
+
+
+
 
 const allowedExtensions = ["csv"]
  
 function NavBar () {
-     
+  
 
-    const [data, setData] = useState([])
+  const [error, setError] = useState("")
+  const [file, setFile] = useState("")
 
-    const [error, setError] = useState("")
-     
-    const [file, setFile] = useState("")
+  const dispatch = useDispatch()
 
     const handleFileChange = (e) => {
         setError("")
@@ -40,15 +43,16 @@ function NavBar () {
             const parsedData = csv?.data
             const filteredData = parsedData.map(obj => {
               return {Amount: obj.Amount, Date: obj.Date, Code: obj.Code, Type: obj.Type }
-            }
-              )
-            setData(filteredData)
+              }
+            )
+              dispatch(receiveTransactionsAction(filteredData))
+
         }
         reader.readAsText(file)
     }
  
     return (
-        <div>
+        <div style={{backgroundColor: 'orange', width: '100%'}}>
           <div style={{fontFamily: 'Nova Round, cursive', fontSize: '45px', fontWeight: 'bold'}}>AWC</div>
 
             <label htmlFor="csvInput" style={{ display: "block" }}>
