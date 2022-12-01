@@ -1,4 +1,4 @@
-import { ADD_FILTER, EDIT_FILTER } from '../actions'
+import { ADD_FILTER, DELETE_FILTER, EDIT_FILTER } from '../actions'
 
 function filtersReducer(state = [], action) {
   const { type, payload } = action
@@ -14,6 +14,12 @@ function filtersReducer(state = [], action) {
           return payload
         }
         return item
+      })
+    }
+    case DELETE_FILTER: {
+      const { code, category } = payload
+      return [...state].filter((item) => {
+        return !(item.code === code && item.category === category)
       })
     }
     default:
