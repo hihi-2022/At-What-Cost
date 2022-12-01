@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux'
 
-
 function TransactionList() {
 
   const [ data, setData ] = useState()

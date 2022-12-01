@@ -4,13 +4,9 @@ import Papa from "papaparse"
 
 import {receiveTransactionsAction} from '../actions'
 
-
-
-
 const allowedExtensions = ["csv"]
  
-function NavBar () {
-  
+function NavBar () {  
 
   const [error, setError] = useState("")
   const [file, setFile] = useState("")
