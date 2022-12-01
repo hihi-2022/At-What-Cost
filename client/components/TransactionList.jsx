@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux'
 
 function TransactionList() {
-  return <h2>The TransactionList component</h2>
+
+  const [ data, setData ] = useState()
+
+  const transactionData = useSelector(globalState => globalState.transactionsList)
+
+  useEffect(() => {
+    setData(transactionData)
+  }, [transactionData])
+
+  return (
+    <>
+      <ul>
+        {data?.map((dataObj, index) => {
+          return <li key={index}>{`${dataObj.Code} $${dataObj.Amount * -1}`}</li> 
+        })}
+      </ul>
+    </>
+  )
 }
 
 export default TransactionList
