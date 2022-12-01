@@ -1,14 +1,6 @@
 import React from 'react'
 import { ResponsiveContainer, PieChart, Pie, Tooltip } from 'recharts'
 
-// const totals = [
-//   { category: 'Thing1', amount: 100, fill: 'red' },
-//   { category: 'Thing2', amount: 1000, fill: 'blue' },
-//   { category: 'Thing3', amount: 50, fill: 'green' },
-//   { category: 'Thing4', amount: 25, fill: 'yellow' },
-//   { category: 'Thing5', amount: 350, fill: 'cyan' },
-// ]
-
 function GraphSummary({ totals }) {
   return (
     <div style={{ width: '300px', height: '300px' }}>
