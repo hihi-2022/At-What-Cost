@@ -11,7 +11,7 @@ function App() {
   // Example data for CostBreakdown and child components
   const totals = categories.map(item => {
     return { category: item, amount: Math.floor(100 + Math.random() * 300), fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}` }
-  });
+  })
 
   return (
     <>
