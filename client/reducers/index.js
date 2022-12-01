@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux'
-
-// import stuff from './stuff'
+import transactionsListReducer from './transactionsListReducer'
+import categoriesReducer from './categoriesReducer'
+import filtersReducer from './filtersReducer'
 
 export default combineReducers({
-  // stuff
+  transactionsList: transactionsListReducer,
+  categories: categoriesReducer,
+  filter: filtersReducer,
 })
