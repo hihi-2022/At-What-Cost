@@ -1,6 +1,8 @@
 export const RECEIVE_TRANSACTIONS = 'RECEIVE_TRANSACTIONS'
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const ADD_FILTER = 'ADD_FILTER'
+export const EDIT_FILTER = 'EDIT_FILTER'
+export const DELETE_FILTER = 'DELETE_FILTER'
 
 export function receiveTransactionsAction(transactions) {
   return {
@@ -19,5 +21,19 @@ export function addFilterAction(filter) {
   return {
     type: ADD_FILTER,
     payload: filter,
+  }
+}
+
+export function editFilterAction(code, category) {
+  return {
+    type: EDIT_FILTER,
+    payload: { code, category },
+  }
+}
+
+export function deleteFilterAction(code, category) {
+  return {
+    type: DELETE_FILTER,
+    payload: { code, category },
   }
 }
