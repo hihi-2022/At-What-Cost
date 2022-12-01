@@ -6,7 +6,7 @@ import TransactionList from './TransactionList'
 import Welcome from './Welcome'
 
 function App() {
-  const categories = useSelector((globalState) => globalState.categories)
+  const categories = useSelector(globalState => globalState.categories)
 
   // Example data for CostBreakdown and child components
   const totals = categories.map(item => {
