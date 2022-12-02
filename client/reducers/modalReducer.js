@@ -10,9 +10,9 @@ function modalReducer(state = initialState, action) {
 
   switch (type) {
     case MODAL_ADD:
-      return { ...state, isAdd: true }
+      return { isAdd: true, isEdit: false }
     case MODAL_EDIT:
-      return { ...state, isEdit: true }
+      return { isAdd: false, isEdit: true }
     case MODAL_HIDE:
       return initialState
     default:
