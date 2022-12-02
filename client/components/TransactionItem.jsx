@@ -18,7 +18,7 @@ function TransactionItem({ transactionData }) {
 
   const deleteFilterHandler = () => {
     console.log('Delete clicked with ', transactionData)
-    dispatch(deleteFilterAction(transactionData.code, transactionData.category))
+    dispatch(deleteFilterAction(transactionData.code))
   }
 
   return (
