@@ -25,10 +25,10 @@ export function getCategoriesAction() {
   }
 }
 
-export function addFilterAction(filter) {
+export function addFilterAction(code, category) {
   return {
     type: ADD_FILTER,
-    payload: filter,
+    payload: { code, category },
   }
 }
 
