@@ -21,9 +21,9 @@ function filtersReducer(state = [], action) {
       })
     }
     case DELETE_FILTER: {
-      const { code, category } = payload
+      const { code } = payload
       return [...state].filter((item) => {
-        return !(item.code === code && item.category === category)
+        return item.code !== code
       })
     }
     default:
