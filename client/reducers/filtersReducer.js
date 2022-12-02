@@ -5,7 +5,11 @@ function filtersReducer(state = [], action) {
 
   switch (type) {
     case ADD_FILTER:
-      return [...state, payload]
+      if (state.find(item => item.code === payload.code)) {
+        return state
+      } else {
+        return [...state, payload]
+      }
     case EDIT_FILTER: {
       const { code: editCode } = payload
       return [...state].map((item) => {
@@ -17,9 +21,9 @@ function filtersReducer(state = [], action) {
       })
     }
     case DELETE_FILTER: {
-      const { code, category } = payload
+      const { code } = payload
       return [...state].filter((item) => {
-        return !(item.code === code && item.category === category)
+        return item.code !== code
       })
     }
     default:

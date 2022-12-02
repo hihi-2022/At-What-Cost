@@ -34,10 +34,10 @@ export function editFilterAction(code, category) {
   }
 }
 
-export function deleteFilterAction(code, category) {
+export function deleteFilterAction(code) {
   return {
     type: DELETE_FILTER,
-    payload: { code, category },
+    payload: { code },
   }
 }
 
