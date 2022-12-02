@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import style from '../styles/Modal.module.scss'
 
 function Modal() {
+  const categories = useSelector((state) => state.categories)
   const modalState = useSelector((state) => state.modal)
   const { isAdd, isEdit } = modalState
 
@@ -23,9 +24,13 @@ function Modal() {
           <div className={style.select_control}>
             <label htmlFor="category">Choose Category:</label>
             <select name="category" id="category">
-              <option value="idk">IDK</option>
-              <option value="idk">IDK</option>
-              <option value="idk">IDK</option>
+              {categories.map((category, index) => {
+                return (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                )
+              })}
             </select>
           </div>
           <button type="submit">Add Filter</button>
