@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from 'react-redux'
+import TransactionItem from "./TransactionItem";
 
 function TransactionList() {
 
@@ -14,8 +15,8 @@ function TransactionList() {
   return (
     <>
       <ul>
-        {data?.map((dataObj, index) => {
-          return <li key={index}>{`${dataObj.Code} $${dataObj.Amount * -1}`}</li> 
+        {data?.map((transactionData, index) => {
+          return <TransactionItem transactionData={transactionData} key={index} />
         })}
       </ul>
     </>
