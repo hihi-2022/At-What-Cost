@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+
+import style from '../styles/transactionItem.module.scss'
 import { addFilterAction, editFilterAction, deleteFilterAction, applyFilterAction } from "../actions";
 
 function TransactionItem({ transactionData }) {
@@ -22,16 +24,21 @@ function TransactionItem({ transactionData }) {
 
   return (
     <li>
-    {`${transactionData.code} $${transactionData.amount * -1} `}
+      <div>
+        {transactionData.code}
+      </div>
+      <div>
+        ${transactionData.amount * -1} 
+      </div>
     {
       transactionData.category
         ?
-      <>
-        <button onClick={editFilterHandler}>Edit</button>
-        <button onClick={deleteFilterHandler}>Delete</button>
-      </>
+      <div>
+        <button className={style.editButton} onClick={editFilterHandler}>Edit</button>
+        <button className={style.deleteButton} onClick={deleteFilterHandler}>Delete</button>
+      </div>
         :
-      <button onClick={addFilterHandler}>Add</button>
+      <button className={style.addButton} onClick={addFilterHandler}>Add</button>
     }
     </li>
   )
