@@ -1,13 +1,21 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addFilterAction, editFilterAction, deleteFilterAction, applyFilterAction } from "../actions";
+import { addFilterAction, editFilterAction, deleteFilterAction, applyFilterAction, modalAddAction, modalEditAction } from "../actions";
 
 function TransactionItem({ transactionData }) {
   const dispatch = useDispatch()
 
-  const addFilterHandler = () => {
-    dispatch(addFilterAction({ code: transactionData.code, category: 'Some category' }))
-    dispatch(applyFilterAction(transactionData.code, 'Some category'))
+  // const addFilterHandler = () => {
+  //   dispatch(addFilterAction({ code: transactionData.code, category: 'Some category' }))
+  //   dispatch(applyFilterAction(transactionData.code, 'Some category'))
+  // }
+
+  const toggleAddModal = () => {
+    dispatch(modalAddAction())
+  }
+
+  const toggleEditModal = () => {
+    dispatch(modalEditAction())
   }
 
   const editFilterHandler = () => {
@@ -27,14 +35,19 @@ function TransactionItem({ transactionData }) {
       transactionData.category
         ?
       <>
-        <button onClick={editFilterHandler}>Edit</button>
+        <button onClick={toggleEditModal}>Edit</button>
         <button onClick={deleteFilterHandler}>Delete</button>
       </>
         :
-      <button onClick={addFilterHandler}>Add</button>
+      <button onClick={toggleAddModal}>Add</button>
     }
     </li>
   )
 }
 
 export default TransactionItem
+
+// {
+//   type: 'APPLY_FILTER',
+//     payload: {code: "Big Barrel N", category: "food"}
+// }
