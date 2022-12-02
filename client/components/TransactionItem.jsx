@@ -1,24 +1,23 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addFilterAction, editFilterAction, deleteFilterAction } from "../actions";
+import { addFilterAction, editFilterAction, deleteFilterAction, applyFilterAction } from "../actions";
 
 function TransactionItem({ transactionData }) {
   const dispatch = useDispatch()
 
   const addFilterHandler = () => {
-    console.log('Add clicked with ', transactionData)
-    transactionData.category = 'A new category'
-    dispatch(addFilterAction({code: transactionData.code, category: 'Some category'}))
+    dispatch(addFilterAction({ code: transactionData.code, category: 'Some category' }))
+    dispatch(applyFilterAction(transactionData.code, 'Some category'))
   }
 
   const editFilterHandler = () => {
-    console.log('Edit clicked with ', transactionData)
     dispatch(editFilterAction(transactionData.code, 'A different category'))
+    dispatch(applyFilterAction(transactionData.code, 'A different category'))
   }
 
   const deleteFilterHandler = () => {
-    console.log('Delete clicked with ', transactionData)
     dispatch(deleteFilterAction(transactionData.code))
+    dispatch(applyFilterAction(transactionData.code, ''))
   }
 
   return (
