@@ -1,15 +1,23 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import style from '../styles/Modal.module.scss'
 
 function Modal() {
+  const modalState = useSelector((state) => state.modal)
+  const { isAdd, isEdit } = modalState
+
   const handleSubmit = (e) => {
     e.preventDefault()
+  }
+
+  if (!isAdd && !isEdit) {
+    return <></>
   }
 
   return (
     <div className={style.container}>
       <div className={style.modal}>
-        <h1>Add</h1>
+        <h1>{isAdd ? 'Add' : 'Edit'}</h1>
         <h2>Code</h2>
         <form onSubmit={handleSubmit} className={style.category_form}>
           <div className={style.select_control}>
