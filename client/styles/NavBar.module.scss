@@ -1,0 +1,29 @@
+@import './global.scss';
+@import url('https://fonts.googleapis.com/css2?family=Nova+Round&display=swap');
+
+.nav {
+  width: 100vw;
+  height: min-content;
+  margin: 0;
+  background: $bg-dark;
+  color: $bg-light;
+  border-bottom: 2px solid $bg-light;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 45px;
+    font-family: 'Nova Round', cursive;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+  }
+}
