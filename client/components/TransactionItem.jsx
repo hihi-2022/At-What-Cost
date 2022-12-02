@@ -10,12 +10,12 @@ function TransactionItem({ transactionData }) {
   //   dispatch(applyFilterAction(transactionData.code, 'Some category'))
   // }
 
-  const toggleAddModal = () => {
-    dispatch(modalAddAction())
+  const toggleAddModal = (code) => {
+    dispatch(modalAddAction(code))
   }
 
-  const toggleEditModal = () => {
-    dispatch(modalEditAction())
+  const toggleEditModal = (code) => {
+    dispatch(modalEditAction(code))
   }
 
   const editFilterHandler = () => {
@@ -35,11 +35,11 @@ function TransactionItem({ transactionData }) {
       transactionData.category
         ?
       <>
-        <button onClick={toggleEditModal}>Edit</button>
+        <button onClick={() => toggleEditModal(transactionData.code)}>Edit</button>
         <button onClick={deleteFilterHandler}>Delete</button>
       </>
         :
-      <button onClick={toggleAddModal}>Add</button>
+      <button onClick={() => toggleAddModal(transactionData.code) }>Add</button>
     }
     </li>
   )
