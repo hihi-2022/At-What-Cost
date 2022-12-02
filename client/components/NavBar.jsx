@@ -40,10 +40,11 @@ function NavBar() {
       const parsedData = csv.data
       const filteredData = parsedData.map((obj) => {
         return {
-          Amount: obj.Amount,
-          Date: obj.Date,
-          Code: obj.Code,
-          Type: obj.Type,
+          amount: Number(obj.Amount),
+          date: obj.Date,
+          code: obj.Code,
+          type: obj.Type,
+          category: ""
         }
       })
       dispatch(receiveTransactionsAction(filteredData))
