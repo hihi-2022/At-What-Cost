@@ -56,16 +56,13 @@ function NavBar() {
       <div className={style.container}>
         <h1>AWC</h1>
         <form onSubmit={handleParse}>
-          <label htmlFor="csvInput" style={{ display: 'block' }}>
-            Enter CSV File
-          </label>
           <input
             onChange={handleFileChange}
             id="csvInput"
             name="file"
-            type="File"
+            type="file"
           />
-          <button type="submit">Submit</button>
+          <button type="submit">Upload</button>
         </form>
       </div>
     </nav>
