@@ -6,6 +6,7 @@ import TransactionList from './TransactionList'
 import Welcome from './Welcome'
 
 import style from '../styles/App.module.scss'
+import Modal from './Modal'
 
 function App() {
   const categories = useSelector((globalState) => globalState.categories)
@@ -21,6 +22,7 @@ function App() {
   return (
     <main className={style.app}>
       <NavBar />
+      <Modal />
       {true ? (
         <>
           <TransactionList />
