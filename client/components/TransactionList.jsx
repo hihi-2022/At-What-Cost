@@ -12,7 +12,6 @@ function TransactionList() {
 
   useEffect(() => {
     setData(transactionData)
-    console.log(transactionData)
   }, [transactionData])
 
   return (
