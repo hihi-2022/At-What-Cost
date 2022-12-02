@@ -1,6 +1,6 @@
 import React from "react";
 
-import style from '../styles/welcome.module.css'
+import style from '../styles/welcome.module.scss'
 
 function Welcome() {
   return (
