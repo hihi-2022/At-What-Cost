@@ -10,7 +10,6 @@ import style from '../styles/App.module.scss'
 function App() {
   const categories = useSelector((globalState) => globalState.categories)
 
-  // Example data for CostBreakdown and child components
   const totals = categories.map((item) => {
     return {
       category: item,

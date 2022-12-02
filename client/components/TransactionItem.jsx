@@ -7,25 +7,25 @@ function TransactionItem({ transactionData }) {
 
   const addFilterHandler = () => {
     console.log('Add clicked with ', transactionData)
-    transactionData.Category = 'A new category'
-    dispatch(addFilterAction({code: transactionData.Code, category: 'Some category'}))
+    transactionData.category = 'A new category'
+    dispatch(addFilterAction({code: transactionData.code, category: 'Some category'}))
   }
 
   const editFilterHandler = () => {
     console.log('Edit clicked with ', transactionData)
-    dispatch(editFilterAction(transactionData.Code, 'A different category'))
+    dispatch(editFilterAction(transactionData.code, 'A different category'))
   }
 
   const deleteFilterHandler = () => {
     console.log('Delete clicked with ', transactionData)
-    dispatch(deleteFilterAction(transactionData.Code, transactionData.category))
+    dispatch(deleteFilterAction(transactionData.code, transactionData.category))
   }
 
   return (
     <li>
-    {`${transactionData.Code} $${transactionData.Amount * -1} `}
+    {`${transactionData.code} $${transactionData.amount * -1} `}
     {
-      transactionData.Category
+      transactionData.category
         ?
       <>
         <button onClick={editFilterHandler}>Edit</button>
