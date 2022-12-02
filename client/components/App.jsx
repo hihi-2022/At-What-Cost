@@ -7,7 +7,7 @@ import Welcome from './Welcome'
 function App() {
   return (
     <>
-      {/* <NavBar />
+      <NavBar />
       <header className="header">
         <h1>App component: At what cost</h1>
       </header>
@@ -21,8 +21,7 @@ function App() {
             :
           <Welcome />
         }
-      </section> */}
-      <Welcome />
+      </section>
     </>
   )
 }
