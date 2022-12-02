@@ -1,0 +1,21 @@
+@import './global.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 80px;
+  padding: 140px 80px 60px;
+  color: $bg-light;
+  background: $bg-dark;
+  width: 100vw;
+  height: 100vh;
+}
