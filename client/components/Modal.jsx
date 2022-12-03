@@ -1,5 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { hideModalAction } from '../actions'
 import style from '../styles/Modal.module.scss'
 
 function Modal() {
@@ -7,8 +8,14 @@ function Modal() {
   const modalState = useSelector((state) => state.modal)
   const { isAdd, isEdit } = modalState
 
+  const dispatch = useDispatch()
+
   const handleSubmit = (e) => {
     e.preventDefault()
+  }
+
+  const handleFilterSubmit = () => {
+    dispatch(hideModalAction())
   }
 
   if (!isAdd && !isEdit) {
@@ -33,7 +40,7 @@ function Modal() {
               })}
             </select>
           </div>
-          <button type="submit">Add Filter</button>
+          <button onClick={handleFilterSubmit} type="submit">Add Filter</button>
         </form>
       </div>
     </div>
