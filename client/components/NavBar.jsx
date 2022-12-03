@@ -7,6 +7,11 @@ import { receiveTransactionsAction } from '../actions'
 
 const allowedExtensions = ['csv']
 
+function getExtension(filename) {
+  const filenameParts = filename.split('.')
+  return filenameParts[filenameParts.length - 1]
+}
+
 function NavBar() {
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
@@ -19,7 +24,7 @@ function NavBar() {
     if (e.target.files.length) {
       const inputFile = e.target.files[0]
 
-      const fileExtension = inputFile.type.split('/')[1]
+      const fileExtension = getExtension(inputFile.name)
       if (!allowedExtensions.includes(fileExtension)) {
         setError('Please input a csv file')
         return
