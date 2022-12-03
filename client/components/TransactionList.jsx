@@ -11,6 +11,7 @@ function TransactionList() {
   )
 
   useEffect(() => {
+    transactionData.sort((item1, item2) => item1.date - item2.date)
     setData(transactionData)
   }, [transactionData])
 
