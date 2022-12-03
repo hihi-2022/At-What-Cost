@@ -25,7 +25,7 @@ function TransactionItem({ transactionData }) {
   return (
     <li>
       <div>
-        {transactionData.date.toISOString().split('T')[0]}
+        {transactionData.date.toLocaleDateString('en-NZ', {})}
       </div>
       <div>
         {transactionData.code}
