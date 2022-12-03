@@ -12,6 +12,11 @@ function getExtension(filename) {
   return filenameParts[filenameParts.length - 1]
 }
 
+function createDate(dateString) {
+  const [day, month, year] = dateString.split('/')
+  return new Date(`${month}/${day}/${year}`)
+}
+
 function NavBar() {
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
@@ -46,7 +51,7 @@ function NavBar() {
       const filteredData = parsedData.map((obj) => {
         return {
           amount: Number(obj.Amount),
-          date: obj.Date,
+          date: createDate(obj.Date),
           code: obj.Code,
           type: obj.Type,
           category: ""
