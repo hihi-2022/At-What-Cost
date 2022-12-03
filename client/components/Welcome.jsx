@@ -1,8 +1,8 @@
 import React from "react";
-
 import style from '../styles/welcome.module.css'
 
 function Welcome() {
+
   return (
     <div className={style.page}>
       <img className={style.welcomePageImage} src="/assets/welcomePageImage.jpg" alt="money" />

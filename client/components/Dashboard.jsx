@@ -7,7 +7,8 @@ import { receiveTransactionsAction } from '../actions'
 
 const allowedExtensions = ['csv']
 
-function NavBar() {
+function Dashboard () {
+ 
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
 
@@ -71,4 +72,4 @@ function NavBar() {
     </nav>
   )
 }
-export default NavBar
+export default Dashboard
