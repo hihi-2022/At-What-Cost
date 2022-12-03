@@ -76,10 +76,11 @@
   },
   "dependencies": {
     "express": "^4.17.2",
+    "firebase": "^9.14.0",
     "knex": "^2.3.0",
     "papaparse": "^5.3.2",
     "pg": "^8.8.0",
-    "recharts": "^2.1.16",
+    "recharts": "^0.22.5",
     "sqlite3": "^5.1.2",
     "superagent": "7.1.1"
   },
