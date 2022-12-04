@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import TransactionItem from "./TransactionItem";
+import TransactionItem from './TransactionItem'
+import style from '../styles/TransactionList.module.scss'
 
 function TransactionList() {
+  const [data, setData] = useState()
 
-  const [ data, setData ] = useState()
-
-  const transactionData = useSelector(globalState => globalState.transactionsList)
+  const transactionData = useSelector(
+    (globalState) => globalState.transactionsList
+  )
 
   useEffect(() => {
     setData(transactionData)
+    console.log(transactionData)
   }, [transactionData])
 
   return (
-    <>
-      <ul>
-        {data?.map((transactionData, index) => {
-          return <TransactionItem transactionData={transactionData} key={index} />
-        })}
-      </ul>
-    </>
+    <ul className={style.list}>
+      {data?.map((transactionData, index) => {
+        return <TransactionItem transactionData={transactionData} key={index} />
+      })}
+    </ul>
   )
 }
 

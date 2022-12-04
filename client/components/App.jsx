@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import TransactionList from './TransactionList'
 import Welcome from './Welcome'
 
+import style from '../styles/App.module.scss'
 import { transactions } from '../../sample_data/transactions'
 
 function computeTotals(categories, transactions) {
@@ -15,6 +16,9 @@ function computeTotals(categories, transactions) {
   transactions.forEach((item) => {
     tally[item.category] += item.amount
   })
+
+function App() {
+  const categories = useSelector((globalState) => globalState.categories)
 
   const totals = categories.map((item) => {
     return {
@@ -33,22 +37,17 @@ function App() {
   const totals = computeTotals(categories, transactions)
 
   return (
-    <>
+    <main className={style.app}>
       <NavBar />
-      <header className="header">
-        <h1>App component: At what cost</h1>
-      </header>
-      <section className="main">
-        {true ? (
-          <>
-            <TransactionList />
-            <CostBreakdown totals={totals} />
-          </>
-        ) : (
-          <Welcome />
-        )}
-      </section>
-    </>
+      {true ? (
+        <>
+          <TransactionList />
+          <CostBreakdown totals={totals} />
+        </>
+      ) : (
+        <Welcome />
+      )}
+    </main>
   )
 }
 

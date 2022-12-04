@@ -1,0 +1,19 @@
+@import './global.scss';
+
+.list {
+  @include listBody;
+  overflow-y: scroll;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  li {
+    padding: 10px;
+  }
+  
+  li + li {
+    border-top: 1px solid black;
+  }
+}
