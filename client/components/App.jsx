@@ -7,7 +7,6 @@ import Welcome from './Welcome'
 
 import style from '../styles/App.module.scss'
 import Modal from './Modal'
-// import { transactions } from '../../sample_data/transactions'
 
 function roundCents(amount) {
   return Math.round(amount * 100) / 100
@@ -42,7 +41,6 @@ function App() {
   const [totals, setTotals] = useState([])
 
   useEffect(() => {
-    console.log('Upload noticed')
     const newTotals = computeTotals(categories, transactionsData) 
     setTotals(newTotals)
   },[transactionsData])
