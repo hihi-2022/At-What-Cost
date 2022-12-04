@@ -8,15 +8,15 @@ function TransactionItem({ transactionData }) {
   const dispatch = useDispatch()
 
   const addFilterHandler = () => {
-    dispatch(addFilterAction({ code: transactionData.code, category: 'Some category' }))
-    dispatch(applyFilterAction(transactionData.code, 'Some category'))
-    dispatch(modalAddAction())
+    // dispatch(addFilterAction({ code: transactionData.code, category: 'Some category' }))
+    // dispatch(applyFilterAction(transactionData.code, 'Some category'))
+    dispatch(modalAddAction(transactionData.code))
   }
 
   const editFilterHandler = () => {
-    dispatch(editFilterAction(transactionData.code, 'A different category'))
-    dispatch(applyFilterAction(transactionData.code, 'A different category'))
-    dispatch(modalEditAction())
+    // dispatch(editFilterAction(transactionData.code, 'A different category'))
+    // dispatch(applyFilterAction(transactionData.code, 'A different category'))
+    dispatch(modalEditAction(transactionData.code))
   }
 
   const deleteFilterHandler = () => {

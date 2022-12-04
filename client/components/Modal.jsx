@@ -1,21 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { hideModalAction } from '../actions'
+import { hideModalAction, applyFilterAction, addFilterAction, editFilterAction } from '../actions'
 import style from '../styles/Modal.module.scss'
 
 function Modal() {
   const categories = useSelector((state) => state.categories)
   const modalState = useSelector((state) => state.modal)
-  const { isAdd, isEdit } = modalState
+  const { isAdd, isEdit, code } = modalState
 
+  const categoryRef = useRef()
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-  }
-
-  const handleFilterSubmit = () => {
+    if(isAdd) {
+    dispatch(addFilterAction(code, categoryRef.current.value))
+    } else {
+      dispatch(editFilterAction(code, categoryRef.current.value))
+    }
+    dispatch(applyFilterAction(code, categoryRef.current.value))
     dispatch(hideModalAction())
+  
   }
 
   if (!isAdd && !isEdit) {
@@ -30,7 +36,11 @@ function Modal() {
         <form onSubmit={handleSubmit} className={style.category_form}>
           <div className={style.select_control}>
             <label htmlFor="category">Choose Category:</label>
-            <select name="category" id="category">
+            <select
+              ref={categoryRef}
+              name="category"
+              id="category"
+            >
               {categories.map((category, index) => {
                 return (
                   <option key={index} value={category}>
@@ -40,7 +50,7 @@ function Modal() {
               })}
             </select>
           </div>
-          <button onClick={handleFilterSubmit} type="submit">Add Filter</button>
+          <button type="submit">Add Filter</button>
         </form>
       </div>
     </div>
