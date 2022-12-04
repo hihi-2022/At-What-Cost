@@ -17,9 +17,6 @@ function computeTotals(categories, transactions) {
     tally[item.category] += item.amount
   })
 
-function App() {
-  const categories = useSelector((globalState) => globalState.categories)
-
   const totals = categories.map((item) => {
     return {
       category: item,
