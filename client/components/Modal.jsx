@@ -15,7 +15,7 @@ function Modal() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(isAdd) {
-    dispatch(addFilterAction(code, categoryRef.current.value))
+      dispatch(addFilterAction(code, categoryRef.current.value))
     } else {
       dispatch(editFilterAction(code, categoryRef.current.value))
     }
