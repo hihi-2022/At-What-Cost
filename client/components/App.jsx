@@ -5,13 +5,32 @@ import NavBar from './NavBar'
 import TransactionList from './TransactionList'
 import Welcome from './Welcome'
 
-function App() {
-  const categories = useSelector(globalState => globalState.categories)
+import { transactions } from '../../sample_data/transactions'
 
-  // Example data for CostBreakdown and child components
-  const totals = categories.map(item => {
-    return { category: item, amount: Math.floor(100 + Math.random() * 300), fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}` }
+function computeTotals(categories, transactions) {
+  const tally = {}
+  for (let category of categories) {
+    tally[category] = 0
+  }
+  transactions.forEach((item) => {
+    tally[item.category] += item.amount
   })
+
+  const totals = categories.map((item) => {
+    return {
+      category: item,
+      amount: tally[item],
+      fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`,
+    }
+  })
+
+  return totals
+}
+
+function App() {
+  const categories = useSelector((globalState) => globalState.categories)
+
+  const totals = computeTotals(categories, transactions)
 
   return (
     <>
