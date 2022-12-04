@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import CostBreakdown from './CostBreakdown'
 import NavBar from './NavBar'
@@ -7,32 +7,45 @@ import Welcome from './Welcome'
 
 import style from '../styles/App.module.scss'
 import Modal from './Modal'
-import { transactions } from '../../sample_data/transactions'
+// import { transactions } from '../../sample_data/transactions'
+
+function roundCents(amount) {
+  return Math.round(amount * 100) / 100
+}
 
 function computeTotals(categories, transactions) {
   const tally = {}
   for (let category of categories) {
     tally[category] = 0
   }
-  transactions.forEach((item) => {
-    tally[item.category] += item.amount
+  transactions?.forEach((item) => {
+    if (item.category !== '') {
+      tally[item.category] += Math.abs(item.amount)
+    }
   })
 
   const totals = categories.map((item) => {
     return {
       category: item,
-      amount: tally[item],
+      amount: roundCents(tally[item]),
       fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`,
     }
   })
 
-  return totals
+  return totals.filter(item => item.amount > 0)
 }
 
 function App() {
   const categories = useSelector((globalState) => globalState.categories)
+  const transactionsData = useSelector(globalState => globalState.transactionsList)
 
-  const totals = computeTotals(categories, transactions)
+  const [totals, setTotals] = useState([])
+
+  useEffect(() => {
+    console.log('Upload noticed')
+    const newTotals = computeTotals(categories, transactionsData) 
+    setTotals(newTotals)
+  },[transactionsData])
 
   return (
     <main className={style.app}>
