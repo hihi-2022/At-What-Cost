@@ -1,38 +1,42 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addFilterAction, editFilterAction, deleteFilterAction } from "../actions";
+
+import style from '../styles/transactionItem.module.scss'
+import { deleteFilterAction, applyFilterAction, modalAddAction, modalEditAction } from "../actions";
 
 function TransactionItem({ transactionData }) {
   const dispatch = useDispatch()
 
   const addFilterHandler = () => {
-    console.log('Add clicked with ', transactionData)
-    transactionData.category = 'A new category'
-    dispatch(addFilterAction({code: transactionData.code, category: 'Some category'}))
+    dispatch(modalAddAction(transactionData.code))
   }
 
   const editFilterHandler = () => {
-    console.log('Edit clicked with ', transactionData)
-    dispatch(editFilterAction(transactionData.code, 'A different category'))
+    dispatch(modalEditAction(transactionData.code))
   }
 
   const deleteFilterHandler = () => {
-    console.log('Delete clicked with ', transactionData)
-    dispatch(deleteFilterAction(transactionData.code, transactionData.category))
+    dispatch(deleteFilterAction(transactionData.code))
+    dispatch(applyFilterAction(transactionData.code, ''))
   }
 
   return (
     <li>
-    {`${transactionData.code} $${transactionData.amount * -1} `}
+      <div>
+        {transactionData.code}
+      </div>
+      <div>
+        ${transactionData.amount * -1} 
+      </div>
     {
       transactionData.category
         ?
-      <>
-        <button onClick={editFilterHandler}>Edit</button>
-        <button onClick={deleteFilterHandler}>Delete</button>
-      </>
+      <div>
+        <button className={style.editButton} onClick={editFilterHandler}>Edit</button>
+        <button className={style.deleteButton} onClick={deleteFilterHandler}>Delete</button>
+      </div>
         :
-      <button onClick={addFilterHandler}>Add</button>
+      <button className={style.addButton} onClick={addFilterHandler}>Add</button>
     }
     </li>
   )
