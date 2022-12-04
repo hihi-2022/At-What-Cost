@@ -7,17 +7,32 @@ import Welcome from './Welcome'
 
 import style from '../styles/App.module.scss'
 import Modal from './Modal'
+import { transactions } from '../../sample_data/transactions'
 
-function App() {
-  const categories = useSelector((globalState) => globalState.categories)
+function computeTotals(categories, transactions) {
+  const tally = {}
+  for (let category of categories) {
+    tally[category] = 0
+  }
+  transactions.forEach((item) => {
+    tally[item.category] += item.amount
+  })
 
   const totals = categories.map((item) => {
     return {
       category: item,
-      amount: Math.floor(100 + Math.random() * 300),
+      amount: tally[item],
       fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`,
     }
   })
+
+  return totals
+}
+
+function App() {
+  const categories = useSelector((globalState) => globalState.categories)
+
+  const totals = computeTotals(categories, transactions)
 
   return (
     <main className={style.app}>
