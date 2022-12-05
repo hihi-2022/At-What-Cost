@@ -70,7 +70,7 @@ export function hideModalAction() {
   }
 }
 
-export function showCsvModal () {
+export function showCsvModalAction () {
   return {
     type: MODAL_CSV
   }

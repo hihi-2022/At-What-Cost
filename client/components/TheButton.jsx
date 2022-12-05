@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import style from "../styles/Button.module.scss"
-import { showCsvModal } from '../actions'
+import { showCsvModalAction } from '../actions'
 
 function TheButton ({buttonWord}) {
   const dispatch = useDispatch()
@@ -9,7 +9,7 @@ function TheButton ({buttonWord}) {
   function buttonClicked (e) {
     e.preventDefault()
     if(buttonWord === "Upload Csv") {
-      dispatch(showCsvModal())
+      dispatch(showCsvModalAction())
     }
   }
 
