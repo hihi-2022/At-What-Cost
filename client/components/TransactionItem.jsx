@@ -22,25 +22,38 @@ function TransactionItem({ transactionData }) {
 
   return (
     <li>
-      <div>
+      <div className={style.date}>
         {transactionData.date.toLocaleDateString('en-NZ', {})}
       </div>
-      <div>
+      <div className={style.code}>
         {transactionData.code}
       </div>
-      <div>
+      <div className={style.category}>
+        {
+          transactionData.category
+          ?
+          <div className={style.categoryLabel}>
+            {transactionData.category}
+          </div>
+          :
+          <div></div>
+        }
+      </div>
+      <div className={style.amount}>
         ${transactionData.amount * -1} 
       </div>
-    {
-      transactionData.category
-        ?
-      <div>
-        <button className={style.editButton} onClick={editFilterHandler}>Edit</button>
-        <button className={style.deleteButton} onClick={deleteFilterHandler}>Delete</button>
-      </div>
-        :
-      <button className={style.addButton} onClick={addFilterHandler}>Add</button>
-    }
+      {
+        transactionData.category
+          ?
+          <div className={style.buttons}>
+          <button className={style.editButton} onClick={editFilterHandler}>Edit</button>
+          <button className={style.deleteButton} onClick={deleteFilterHandler}>Delete</button>
+        </div>
+          :
+        <div className = {style.buttons}>
+          <button className={style.addButton} onClick={addFilterHandler}>Add</button>
+        </div>
+      }
     </li>
   )
 }
