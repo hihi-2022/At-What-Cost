@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Papa from 'papaparse'
 import style from '../styles/NavBar.module.scss'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { app } from '../../firebase'
 
 import { receiveTransactionsAction } from '../actions'
 import { Link } from 'react-router-dom'
@@ -16,8 +18,28 @@ function getExtension(filename) {
 function NavBar() {
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   const dispatch = useDispatch()
+
+  const auth = getAuth(app)
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      setIsLoggedIn(true)
+      // ...
+    } else {
+      setIsLoggedIn(false)
+      // User is signed out
+      // ...
+    }
+  })
+
+  const handleLogout = () => {
+    auth.signOut()
+  }
 
   const handleFileChange = (e) => {
     setError('')
@@ -73,10 +95,16 @@ function NavBar() {
           />
           <button type="submit">Submit</button>
         </form>
-        <div className={style.navlinks}>
-          <Link to="/signin">Sign In</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
+        {isLoggedIn ? (
+          <div className={style.navlinks}>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
+          <div className={style.navlinks}>
+            <Link to="/signin">Sign In</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        )}
       </div>
     </nav>
   )

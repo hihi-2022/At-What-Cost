@@ -32,12 +32,21 @@
 .navlinks {
   display: flex;
   gap: 40px;
-
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
   a {
     text-decoration: none;
+    font-size: 18px;
     color: white;
     display: flex;
+    cursor: pointer;
+  }
+
+  button {
+    cursor: pointer;
+    color: white;
+    background: transparent;
     font-size: 18px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: none;
   }
 }
