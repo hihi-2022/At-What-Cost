@@ -7,6 +7,7 @@ export const DELETE_FILTER = 'DELETE_FILTER'
 export const MODAL_ADD = 'MODAL_ADD'
 export const MODAL_EDIT = 'MODAL_EDIT'
 export const MODAL_HIDE = 'MODAL_HIDE'
+export const MODAL_CSV = 'MODAL_CSV'
 
 export function receiveTransactionsAction(transactions) {
   return {
@@ -66,5 +67,11 @@ export function modalEditAction(code) {
 export function hideModalAction() {
   return {
     type: MODAL_HIDE,
+  }
+}
+
+export function showCsvModal () {
+  return {
+    type: MODAL_CSV
   }
 }

@@ -1,9 +1,10 @@
-import { MODAL_ADD, MODAL_EDIT, MODAL_HIDE } from '../actions'
+import { MODAL_ADD, MODAL_EDIT, MODAL_HIDE, MODAL_CSV } from '../actions'
 
 const initialState = {
   isAdd: false,
   isEdit: false,
-  code: ""
+  code: "",
+  isCsv: false,
 }
 
 function modalReducer(state = initialState, action) {
@@ -14,6 +15,8 @@ function modalReducer(state = initialState, action) {
       return { isAdd: true, isEdit: false, code: payload }
     case MODAL_EDIT:
       return { isAdd: false, isEdit: true, code: payload }
+    case MODAL_CSV: 
+      return { isAdd: true, isEdit: false, code: payload, isCsv: true }
     case MODAL_HIDE:
       return initialState
     default:
