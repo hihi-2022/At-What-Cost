@@ -2,19 +2,17 @@ import React from "react";
 import { useDispatch } from "react-redux";
 
 import style from '../styles/transactionItem.module.scss'
-import { addFilterAction, editFilterAction, deleteFilterAction, applyFilterAction } from "../actions";
+import { deleteFilterAction, applyFilterAction, modalAddAction, modalEditAction } from "../actions";
 
 function TransactionItem({ transactionData }) {
   const dispatch = useDispatch()
 
   const addFilterHandler = () => {
-    dispatch(addFilterAction({ code: transactionData.code, category: 'Some category' }))
-    dispatch(applyFilterAction(transactionData.code, 'Some category'))
+    dispatch(modalAddAction(transactionData.code))
   }
 
   const editFilterHandler = () => {
-    dispatch(editFilterAction(transactionData.code, 'A different category'))
-    dispatch(applyFilterAction(transactionData.code, 'A different category'))
+    dispatch(modalEditAction(transactionData.code))
   }
 
   const deleteFilterHandler = () => {

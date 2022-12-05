@@ -49,15 +49,17 @@ export function deleteFilterAction(code) {
   }
 }
 
-export function modalAddAction() {
+export function modalAddAction(code) {
   return {
     type: MODAL_ADD,
+    payload: code
   }
 }
 
-export function modalEditAction() {
+export function modalEditAction(code) {
   return {
     type: MODAL_EDIT,
+    payload: code
   }
 }
 

@@ -3,7 +3,7 @@ import { ResponsiveContainer, PieChart, Pie, Tooltip } from 'recharts'
 
 function GraphSummary({ totals }) {
   return (
-    <div style={{ width: '300px', height: '300px' }}>
+    <div style={{ width: '500px', height: '300px' }}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={400} height={400}>
           <Pie
