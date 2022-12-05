@@ -1,16 +1,61 @@
-import React, { useState } from 'react'
-import { useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { hideModalAction, applyFilterAction, addFilterAction, editFilterAction } from '../actions'
+import { hideModalAction, applyFilterAction, addFilterAction, editFilterAction, receiveTransactionsAction } from '../actions'
 import style from '../styles/Modal.module.scss'
+import Papa from 'papaparse'
+
+const allowedExtensions = ['csv']
+
 
 function Modal() {
   const categories = useSelector((state) => state.categories.list)
   const modalState = useSelector((state) => state.modal)
-  const { isAdd, isEdit, code } = modalState
+  const { isAdd, isEdit, code, isCsv } = modalState
+
+  const [error, setError] = useState('')
+  const [file, setFile] = useState('')
 
   const categoryRef = useRef()
   const dispatch = useDispatch()
+
+  const handleFileChange = (e) => {
+    setError('')
+
+    if (e.target.files.length) {
+      const inputFile = e.target.files[0]
+
+      const fileExtension = inputFile.type.split('/')[1]
+      if (!allowedExtensions.includes(fileExtension)) {
+        setError('Please input a csv file')
+        return
+      }
+      setFile(inputFile)
+    }
+  }
+
+  const handleParse = (e) => {
+    e.preventDefault()
+    if (!file) return alert('Please enter a CSV file')
+
+    const reader = new FileReader()
+    reader.readAsText(file)
+
+    reader.onload = async ({ target }) => {
+      const csv = Papa.parse(target.result, { header: true })
+      const parsedData = csv.data
+      const filteredData = parsedData.map((obj) => {
+        return {
+          amount: Number(obj.Amount),
+          date: obj.Date,
+          code: obj.Code,
+          type: obj.Type,
+          category: ""
+        }
+      })
+      dispatch(receiveTransactionsAction(filteredData))
+    }
+    dispatch(hideModalAction())
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -21,11 +66,36 @@ function Modal() {
     }
     dispatch(applyFilterAction(code, categoryRef.current.value))
     dispatch(hideModalAction())
-  
   }
 
-  if (!isAdd && !isEdit) {
+  const cancel = () => {
+    dispatch(hideModalAction())
+  }
+
+  if (!isCsv && !isAdd && !isEdit) {
     return <></>
+  }
+
+  if(isCsv) {
+    return (
+      <div className={style.container}>
+        <div className={style.csvModal}>
+          <form onSubmit={handleParse}>
+            <label htmlFor="csvInput" style={{ display: 'block' }}>
+              Enter CSV File
+            </label>
+            <input
+              onChange={handleFileChange}
+              id="csvInput"
+              name="file"
+              type="File"
+            />
+            <button type="submit">Submit</button>
+          </form>
+         <button>Cancel</button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -52,6 +122,7 @@ function Modal() {
           </div>
           <button type="submit">Add Filter</button>
         </form>
+       <button className={style.cancel} onClick={cancel}>Cancel</button>
       </div>
     </div>
   )

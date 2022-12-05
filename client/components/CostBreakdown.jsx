@@ -7,8 +7,12 @@ import style from '../styles/CostBreakdown.module.scss'
 function CostBreakdown({ totals }) {
   return (
     <div className={style.container}>
-      <GraphSummary totals={totals} />
-      <CostSummary totals={totals} />
+      <div className={style.graphSummary}>
+        <GraphSummary totals={totals} />
+      </div>
+      <div>
+        <CostSummary totals={totals} />
+      </div>
     </div>
   )
 }

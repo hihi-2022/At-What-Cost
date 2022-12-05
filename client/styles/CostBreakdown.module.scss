@@ -3,3 +3,18 @@
 .container {
   @include listBody;
 }
+
+.graphSummary {
+  display: flex;
+  justify-content: center;
+}
+
+.topExpenses {
+  color: #232121;
+}
+
+.itemList {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  margin-left: 0.9rem;
+}
