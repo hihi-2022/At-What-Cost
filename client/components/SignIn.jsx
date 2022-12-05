@@ -1,14 +1,28 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import React, { useState } from 'react'
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from 'firebase/auth'
+import React, { useState, useEffect } from 'react'
 import style from '../styles/SignUp.module.scss'
 import { app } from '../../firebase'
+import { useNavigate } from 'react-router-dom'
 
 function SignIn() {
   const auth = getAuth(app)
+  const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState({
     userEmail: '',
     userPassword: '',
   })
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        return navigate('/')
+      }
+    })
+  }, [])
 
   const { userEmail: email, userPassword: password } = userDetails
 
