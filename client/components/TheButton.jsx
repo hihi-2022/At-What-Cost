@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import style from '../styles/Button.module.scss'
 import { showCsvModalAction } from '../actions'
 
-function TheButton({ buttonWord }) {
+function TheButton({ buttonWord, clickFn }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -18,6 +18,9 @@ function TheButton({ buttonWord }) {
     }
     if (buttonWord === 'Sign Up') {
       return navigate('/signup')
+    }
+    if (buttonWord === 'Logout') {
+      return clickFn()
     }
   }
 

@@ -27,7 +27,8 @@ function NavBar() {
         <h1>AWC</h1>
         {isLoggedIn ? (
           <div className={style.navlinks}>
-            <button onClick={handleLogout}>Logout</button>
+            <TheButton buttonWord={'Upload'} />
+            <TheButton buttonWord={'Logout'} clickFn={handleLogout} />
           </div>
         ) : (
           <div className={style.navlinks}>
