@@ -1,5 +1,7 @@
 import React from 'react'
 
+import style from '../styles/CostBreakdown.module.scss'
+
 function getTopExpenses(totals, maxItems) {
   totals.sort((item1, item2) => item2.amount - item1.amount)
   return totals.slice(0, maxItems)
@@ -10,10 +12,10 @@ function CostSummary({ totals }) {
 
   return (
     <div>
-      <h3>Top 5 expenses</h3>
+      <h2 className={style.topExpenses}>Top 5 expenses</h2>
       <ol>
-        {topExpenses.map((item) => (
-          <li key={item.category}>{`${item.category}: $${item.amount}`}</li>
+        {topExpenses.map((item, index) => (
+          <li className={style.itemList} key={item.category}>{`${index + 1}. ${item.category}: $${item.amount}`}</li>
         ))}
       </ol>
     </div>
