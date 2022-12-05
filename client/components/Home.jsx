@@ -6,7 +6,6 @@ import Welcome from './Welcome'
 
 function Home() {
   const categories = useSelector((globalState) => globalState.categories)
-  // const colours = useSelector((globalState) => globalState.categories.colourMap)
   const transactionsData = useSelector(
     (globalState) => globalState.transactionsList
   )
