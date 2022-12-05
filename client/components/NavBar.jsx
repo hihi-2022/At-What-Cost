@@ -3,7 +3,6 @@ import style from '../styles/NavBar.module.scss'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from '../../firebase'
 import TheButton from './TheButton'
-import { Link } from 'react-router-dom'
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -32,13 +31,11 @@ function NavBar() {
           </div>
         ) : (
           <div className={style.navlinks}>
-            <Link to="/signin">Sign In</Link>
-            <Link to="/signup">Sign Up</Link>
+            <TheButton buttonWord="Sign In" />
+            <TheButton buttonWord="Sign Up" />
+            <TheButton buttonWord={'Upload'} />
           </div>
         )}
-        <div className={style.navBarList}>
-          <TheButton buttonWord={'Upload Csv'} />
-        </div>
       </div>
     </nav>
   )

@@ -31,7 +31,7 @@
 
 .navlinks {
   display: flex;
-  gap: 40px;
+  gap: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   
   a {
@@ -40,14 +40,6 @@
     color: white;
     display: flex;
     cursor: pointer;
-  }
-
-  button {
-    cursor: pointer;
-    color: white;
-    background: transparent;
-    font-size: 18px;
-    border: none;
   }
 }
 
