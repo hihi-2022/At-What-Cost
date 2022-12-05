@@ -16,6 +16,7 @@ function Home() {
   useEffect(() => {
     const newTotals = computeTotals(categories, transactionsData)
     setTotals(newTotals)
+    console.log(transactionsData)
   }, [transactionsData])
   return (
     <>
