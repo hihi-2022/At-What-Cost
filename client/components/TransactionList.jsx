@@ -28,19 +28,25 @@ function TransactionList() {
   }
 
   return (
-    <div>
+    <div className={style.container}>
       <ul className={style.list}>
         {data?.map((transactionData, index) => {
           return <TransactionItem transactionData={transactionData} colours={colours} key={index} />
         })}
       </ul>
-      <form>
-        <input type="radio" id='all' name='all' value='all' checked={selection === 'all'} onChange={handleSelectionChange} />
-        <label htmlFor='all'> all </label>
-        <input type="radio" id='unfiltered' name='unfiltered' value='unfiltered' checked={selection === 'unfiltered'} onChange={handleSelectionChange} />
-        <label htmlFor='unfiltered'> unfiltered </label>
-        <input type="radio" id='filtered' name='filtered' value='filtered' checked={selection === 'filtered'} onChange={handleSelectionChange} />
-        <label htmlFor='filtered'> filtered </label>
+      <form className={style.selectionForm}>
+        <div>
+          <input type="radio" id='all' name='all' value='all' checked={selection === 'all'} onChange={handleSelectionChange} />
+          <label htmlFor='all'> all</label>
+        </div>
+        <div>
+          <input type="radio" id='unfiltered' name='unfiltered' value='unfiltered' checked={selection === 'unfiltered'} onChange={handleSelectionChange} />
+          <label htmlFor='unfiltered'> unfiltered</label>
+        </div>
+        <div>
+          <input type="radio" id='filtered' name='filtered' value='filtered' checked={selection === 'filtered'} onChange={handleSelectionChange} />
+          <label htmlFor='filtered'> filtered</label>
+        </div>
       </form>
     </div>
   )
