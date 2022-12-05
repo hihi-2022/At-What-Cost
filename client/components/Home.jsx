@@ -15,11 +15,11 @@ function Home() {
   useEffect(() => {
     const newTotals = computeTotals(categories, transactionsData)
     setTotals(newTotals)
-    console.log(transactionsData)
+    console.log(transactionsData.length)
   }, [transactionsData])
   return (
     <>
-      {true ? (
+      {transactionsData.length !== 0 ? (
         <>
           <TransactionList />
           <CostBreakdown totals={totals} />
