@@ -13,8 +13,15 @@ function TransactionList() {
   const colours = useSelector((globalState) => globalState.categories.colourMap)
 
   useEffect(() => {
-    setData(transactionData)
-  }, [transactionData])
+    let selectedData = transactionData
+    if (selection === 'unfiltered') {
+      selectedData = selectedData.filter(item => item.category === '')
+    } else if (selection === 'filtered') {
+      selectedData = selectedData.filter(item => item.category !== '')
+    }
+
+    setData(selectedData)
+  }, [transactionData, selection])
 
   const handleSelectionChange = (e) => {
     setSelection(e.target.value)
@@ -27,13 +34,13 @@ function TransactionList() {
           return <TransactionItem transactionData={transactionData} colours={colours} key={index} />
         })}
       </ul>
-      <form onChange={handleSelectionChange}>
-        <input type="radio" id='all' name='all' value='all' checked={selection === 'all'} />
+      <form>
+        <input type="radio" id='all' name='all' value='all' checked={selection === 'all'} onChange={handleSelectionChange} />
         <label htmlFor='all'> all </label>
-        <input type="radio" id='filtered' name='filtered' value='filtered' checked={selection === 'filtered'} />
-        <label htmlFor='filtered'> filtered </label>
-        <input type="radio" id='unfiltered' name='unfiltered' value='unfiltered' checked={selection === 'unfiltered'} />
+        <input type="radio" id='unfiltered' name='unfiltered' value='unfiltered' checked={selection === 'unfiltered'} onChange={handleSelectionChange} />
         <label htmlFor='unfiltered'> unfiltered </label>
+        <input type="radio" id='filtered' name='filtered' value='filtered' checked={selection === 'filtered'} onChange={handleSelectionChange} />
+        <label htmlFor='filtered'> filtered </label>
       </form>
     </div>
   )
