@@ -33,7 +33,7 @@ function Modal() {
     if (e.target.files.length) {
       const inputFile = e.target.files[0]
 
-      const fileExtension = getExtension(inputFile)
+      const fileExtension = getExtension(inputFile.name)
       if (!allowedExtensions.includes(fileExtension)) {
         setError('Please input a csv file')
         return

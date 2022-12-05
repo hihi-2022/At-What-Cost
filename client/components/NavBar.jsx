@@ -1,7 +1,7 @@
 import React from 'react'
 import style from '../styles/NavBar.module.scss'
 
-import { receiveTransactionsAction } from '../actions'
+import TheButton from './TheButton'
 
 function NavBar() {
 
