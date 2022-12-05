@@ -47,7 +47,6 @@ function computeTotals(categories, transactions) {
     return {
       category: item,
       amount: roundCents(tally[item]),
-      // fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`,
       fill: categories.colourMap[item]
     }
   })
