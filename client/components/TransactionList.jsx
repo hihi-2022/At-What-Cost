@@ -8,12 +8,11 @@ function TransactionList() {
   const [selection, setSelection] = useState('all')
 
   const transactionData = useSelector(
-    (globalState) => globalState.transactionsList
+    (globalState) => globalState.transactionsList.sort((item1, item2) => item1.date - item2.date)
   )
   const colours = useSelector((globalState) => globalState.categories.colourMap)
 
   useEffect(() => {
-    transactionData.sort((item1, item2) => item1.date - item2.date)
     setData(transactionData)
   }, [transactionData])
 
