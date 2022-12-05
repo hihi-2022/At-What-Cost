@@ -1,7 +1,19 @@
 @import './global.scss';
 
-.list {
+.container {
   @include listBody;
+}
+
+.selectionForm {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.list {
+  height: 70vh;
+  max-height: 70vh;
+  width: 100%;
   overflow-y: scroll;
   list-style: none;
   display: flex;
