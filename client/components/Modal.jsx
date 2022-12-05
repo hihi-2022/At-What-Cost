@@ -1,15 +1,23 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { hideModalAction, applyFilterAction, addFilterAction, editFilterAction, receiveTransactionsAction } from '../actions'
+import {
+  hideModalAction,
+  applyFilterAction,
+  addFilterAction,
+  editFilterAction,
+  receiveTransactionsAction,
+} from '../actions'
 import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
 
 const allowedExtensions = ['csv']
 
-
 function Modal() {
   const categories = useSelector((state) => state.categories)
   const modalState = useSelector((state) => state.modal)
+  const filters = useSelector((state) => state.filter)
+
   const { isAdd, isEdit, code, isCsv } = modalState
 
   const [error, setError] = useState('')
@@ -44,12 +52,15 @@ function Modal() {
       const csv = Papa.parse(target.result, { header: true })
       const parsedData = csv.data
       const filteredData = parsedData.map((obj) => {
+        const existingFilter = filters.find(
+          (filter) => filter.code === obj.Code
+        )
         return {
           amount: Number(obj.Amount),
           date: obj.Date,
           code: obj.Code,
           type: obj.Type,
-          category: ""
+          category: existingFilter ? existingFilter.code : '',
         }
       })
       dispatch(receiveTransactionsAction(filteredData))
@@ -59,7 +70,7 @@ function Modal() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(isAdd) {
+    if (isAdd) {
       dispatch(addFilterAction(code, categoryRef.current.value))
     } else {
       dispatch(editFilterAction(code, categoryRef.current.value))
@@ -76,7 +87,7 @@ function Modal() {
     return <></>
   }
 
-  if(isCsv) {
+  if (isCsv) {
     return (
       <div className={style.container}>
         <div className={style.csvModal}>
@@ -92,7 +103,7 @@ function Modal() {
             />
             <button type="submit">Submit</button>
           </form>
-         <button>Cancel</button>
+          <button>Cancel</button>
         </div>
       </div>
     )
@@ -106,11 +117,7 @@ function Modal() {
         <form onSubmit={handleSubmit} className={style.category_form}>
           <div className={style.select_control}>
             <label htmlFor="category">Choose Category:</label>
-            <select
-              ref={categoryRef}
-              name="category"
-              id="category"
-            >
+            <select ref={categoryRef} name="category" id="category">
               {categories.map((category, index) => {
                 return (
                   <option key={index} value={category}>
@@ -122,7 +129,9 @@ function Modal() {
           </div>
           <button type="submit">Add Filter</button>
         </form>
-       <button className={style.cancel} onClick={cancel}>Cancel</button>
+        <button className={style.cancel} onClick={cancel}>
+          Cancel
+        </button>
       </div>
     </div>
   )
