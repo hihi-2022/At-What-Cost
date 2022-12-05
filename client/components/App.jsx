@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import style from '../styles/App.module.scss'
 import Modal from './Modal'
 import Home from './Home'
+import SignUp from './SignUp'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <Modal />
     </main>
