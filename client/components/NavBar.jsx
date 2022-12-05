@@ -3,7 +3,7 @@ import style from '../styles/NavBar.module.scss'
 import TheButton from './TheButton'
 
 function NavBar() {
-
+  
   return (
     <nav className={style.nav}>
       <div className={style.container}>
