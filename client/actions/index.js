@@ -1,3 +1,5 @@
+import { getUserFiltersAPI } from '../apis'
+
 export const RECEIVE_TRANSACTIONS = 'RECEIVE_TRANSACTIONS'
 export const APPLY_FILTER = 'APPLY_FILTER'
 export const GET_CATEGORIES = 'GET_CATEGORIES'
@@ -8,6 +10,7 @@ export const MODAL_ADD = 'MODAL_ADD'
 export const MODAL_EDIT = 'MODAL_EDIT'
 export const MODAL_HIDE = 'MODAL_HIDE'
 export const MODAL_CSV = 'MODAL_CSV'
+export const RECEIEVE_USER_FILTERS = 'RECEIEVE_USER_FILTERS'
 
 export function receiveTransactionsAction(transactions) {
   return {
@@ -19,7 +22,7 @@ export function receiveTransactionsAction(transactions) {
 export function applyFilterAction(code, category) {
   return {
     type: APPLY_FILTER,
-    payload: { code, category }
+    payload: { code, category },
   }
 }
 
@@ -53,14 +56,14 @@ export function deleteFilterAction(code) {
 export function modalAddAction(code) {
   return {
     type: MODAL_ADD,
-    payload: code
+    payload: code,
   }
 }
 
 export function modalEditAction(code) {
   return {
     type: MODAL_EDIT,
-    payload: code
+    payload: code,
   }
 }
 
@@ -70,8 +73,20 @@ export function hideModalAction() {
   }
 }
 
-export function showCsvModalAction () {
+export function showCsvModalAction() {
   return {
-    type: MODAL_CSV
+    type: MODAL_CSV,
   }
+}
+
+export function receiveFiltersAction(filters) {
+  return {
+    type: RECEIEVE_USER_FILTERS,
+    payload: filters,
+  }
+}
+
+export const receieveUserFiltersThunk = (uuid) => async (dispatch) => {
+  const userFilters = await getUserFiltersAPI(uuid)
+  dispatch(receiveFiltersAction(userFilters))
 }
