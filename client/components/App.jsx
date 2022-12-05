@@ -6,6 +6,7 @@ import style from '../styles/App.module.scss'
 import Modal from './Modal'
 import Home from './Home'
 import SignUp from './SignUp'
+import SignIn from './SignIn'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
       <Modal />
     </main>
