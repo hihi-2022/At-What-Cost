@@ -55,7 +55,7 @@ function SignIn() {
             required
           />
         </div>
-        <button type="submit">Sign In</button>
+        <button style={{cursor: 'pointer'}} type="submit">Sign In</button>
       </form>
     </main>
   )

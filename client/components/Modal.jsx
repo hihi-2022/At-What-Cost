@@ -92,7 +92,7 @@ function Modal() {
             />
             <button type="submit">Submit</button>
           </form>
-         <button>Cancel</button>
+         <button onClick={cancel}>Cancel</button>
         </div>
       </div>
     )
