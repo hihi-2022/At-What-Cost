@@ -29,6 +29,20 @@
   }
 }
 
+.navlinks {
+  display: flex;
+  gap: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+  a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: flex;
+    cursor: pointer;
+  }
+}
+
 .navBarList {
   height: 100%;
   display: flex;

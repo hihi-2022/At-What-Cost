@@ -1,6 +1,6 @@
 import {
   getAuth,
-  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   onAuthStateChanged,
 } from 'firebase/auth'
 import React, { useState, useEffect } from 'react'
@@ -8,7 +8,7 @@ import style from '../styles/SignUp.module.scss'
 import { app } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 
-function SignUp() {
+function SignIn() {
   const auth = getAuth(app)
   const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState({
@@ -34,18 +34,14 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const credentials = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    )
+    const credentials = await signInWithEmailAndPassword(auth, email, password)
     console.log(credentials.user)
   }
 
   return (
     <main className={style.container}>
       <form onSubmit={handleSubmit} className={style.form}>
-        <h1 className={style.heading}>Sign Up Below:</h1>
+        <h1 className={style.heading}>Sign In Below:</h1>
         <div className={style.form_control}>
           <label htmlFor="userEmail">Email:</label>
           <input onChange={handleChange} id="userEmail" type="email" required />
@@ -59,9 +55,9 @@ function SignUp() {
             required
           />
         </div>
-        <button style={{cursor: 'pointer'}}type="submit">Sign Up</button>
+        <button style={{cursor: 'pointer'}} type="submit">Sign In</button>
       </form>
     </main>
   )
 }
-export default SignUp
+export default SignIn

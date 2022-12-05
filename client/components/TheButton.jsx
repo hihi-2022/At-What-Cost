@@ -1,15 +1,26 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import style from "../styles/Button.module.scss"
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import style from '../styles/Button.module.scss'
 import { showCsvModalAction } from '../actions'
 
-function TheButton ({buttonWord}) {
+function TheButton({ buttonWord, clickFn }) {
   const dispatch = useDispatch()
-  
-  function buttonClicked (e) {
+  const navigate = useNavigate()
+
+  function buttonClicked(e) {
     e.preventDefault()
-    if(buttonWord === "Upload Csv") {
-      dispatch(showCsvModalAction())
+    if (buttonWord === 'Upload') {
+      return dispatch(showCsvModalAction())
+    }
+    if (buttonWord === 'Sign In') {
+      return navigate('/signin')
+    }
+    if (buttonWord === 'Sign Up') {
+      return navigate('/signup')
+    }
+    if (buttonWord === 'Logout') {
+      return clickFn()
     }
   }
 
