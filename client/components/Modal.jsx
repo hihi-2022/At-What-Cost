@@ -5,7 +5,7 @@ import { hideModalAction, applyFilterAction, addFilterAction, editFilterAction }
 import style from '../styles/Modal.module.scss'
 
 function Modal() {
-  const categories = useSelector((state) => state.categories)
+  const categories = useSelector((state) => state.categories.list)
   const modalState = useSelector((state) => state.modal)
   const { isAdd, isEdit, code } = modalState
 

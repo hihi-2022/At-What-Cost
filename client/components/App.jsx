@@ -12,7 +12,7 @@ function roundCents(amount) {
   return Math.round(amount * 100) / 100
 }
 
-function computeTotals(categories, transactions) {
+function computeTotals(categories, colours, transactions) {
   const tally = {}
   for (let category of categories) {
     tally[category] = 0
@@ -27,7 +27,7 @@ function computeTotals(categories, transactions) {
     return {
       category: item,
       amount: roundCents(tally[item]),
-      fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`,
+      fill: colours[item]
     }
   })
 
@@ -35,13 +35,14 @@ function computeTotals(categories, transactions) {
 }
 
 function App() {
-  const categories = useSelector((globalState) => globalState.categories)
+  const categories = useSelector((globalState) => globalState.categories.list)
+  const colours = useSelector((globalState) => globalState.categories.colourMap)
   const transactionsData = useSelector(globalState => globalState.transactionsList)
 
   const [totals, setTotals] = useState([])
 
   useEffect(() => {
-    const newTotals = computeTotals(categories, transactionsData) 
+    const newTotals = computeTotals(categories, colours, transactionsData) 
     setTotals(newTotals)
   },[transactionsData])
 

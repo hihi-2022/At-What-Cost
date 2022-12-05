@@ -9,6 +9,7 @@ function TransactionList() {
   const transactionData = useSelector(
     (globalState) => globalState.transactionsList
   )
+  const colours = useSelector((globalState) => globalState.categories.colourMap)
 
   useEffect(() => {
     transactionData.sort((item1, item2) => item1.date - item2.date)
@@ -18,7 +19,7 @@ function TransactionList() {
   return (
     <ul className={style.list}>
       {data?.map((transactionData, index) => {
-        return <TransactionItem transactionData={transactionData} key={index} />
+        return <TransactionItem transactionData={transactionData} colours={colours} key={index} />
       })}
     </ul>
   )

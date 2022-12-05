@@ -1,10 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import style from '../styles/transactionItem.module.scss'
 import { deleteFilterAction, applyFilterAction, modalAddAction, modalEditAction } from "../actions";
 
-function TransactionItem({ transactionData }) {
+function TransactionItem({ transactionData, colours }) {
   const dispatch = useDispatch()
 
   const addFilterHandler = () => {
@@ -32,7 +32,7 @@ function TransactionItem({ transactionData }) {
         {
           transactionData.category
           ?
-          <div className={style.categoryLabel}>
+            <div className={style.categoryLabel} style={{backgroundColor: colours[transactionData.category]}}>
             {transactionData.category}
           </div>
           :
