@@ -4,6 +4,7 @@ import Papa from 'papaparse'
 import style from '../styles/NavBar.module.scss'
 
 import { receiveTransactionsAction } from '../actions'
+import { Link } from 'react-router-dom'
 
 const allowedExtensions = ['csv']
 
@@ -49,7 +50,7 @@ function NavBar() {
           date: obj.Date,
           code: obj.Code,
           type: obj.Type,
-          category: ""
+          category: '',
         }
       })
       dispatch(receiveTransactionsAction(filteredData))
@@ -72,6 +73,10 @@ function NavBar() {
           />
           <button type="submit">Submit</button>
         </form>
+        <div className={style.navlinks}>
+          <Link to="/signin">Sign In</Link>
+          <Link to="/signup">Sign Up</Link>
+        </div>
       </div>
     </nav>
   )
