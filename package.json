@@ -91,7 +91,7 @@
     "testEnvironment": "jsdom"
   }, 
   "engines" : { 
-    "node" : ">=16.0.0 <17.0.0"
+    "node" : "18.x"
   },
   "browserslist": "> 2%, not dead"
 }
