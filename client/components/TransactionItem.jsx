@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import style from '../styles/transactionItem.module.scss'
+import style from '../styles/TransactionItem.module.scss'
 import { deleteFilterAction, applyFilterAction, modalAddAction, modalEditAction } from "../actions";
 
 function TransactionItem({ transactionData, colours }) {
