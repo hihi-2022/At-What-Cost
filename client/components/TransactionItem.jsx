@@ -62,7 +62,13 @@ function TransactionItem({ transactionData, colours }) {
           <div></div>
         )}
       </div>
-      <div className={style.amount}>${transactionData.amount}</div>
+      {transactionData.amount < 0 ? (
+        <div className={`${style.amount} ${style.negative}`}>
+          ${Math.abs(transactionData.amount)}
+        </div>
+      ) : (
+        <div className={style.amount}>${transactionData.amount}</div>
+      )}
       {transactionData.category ? (
         <div className={style.buttons}>
           <button className={style.editButton} onClick={editFilterHandler}>
