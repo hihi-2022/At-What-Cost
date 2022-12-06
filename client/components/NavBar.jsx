@@ -37,7 +37,7 @@ function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [color, setcolor] = useState('#F2F2F2')
   const [ logo, setLogo ] = useState("AWC")
-  const [ arrNum, setArrNum ] = useState(Math.floor(Math.random() * logos.length))
+  const [ arrNum, setArrNum ] = useState(randomArrayNumber())
 
   function randomArrayNumber()  {
     const number = Math.floor(Math.random() * logos.length)
@@ -51,7 +51,6 @@ function NavBar() {
       } else {
       setArrNum(number + 1)
       }
-      console.log()
     } else {
       setArrNum(number)
     }
