@@ -9,15 +9,19 @@ const initialState = {
     'Life & Entertainment',
     'Shopping',
     'Investments',
+    'Income',
+    'Transfer'
   ],
   colourMap: {
     'Food & Drink': '#f69301',
     'Housing': '#2c993e',
-    'Transportation': '#257f61',
+    'Transportation': '#8e01e6',
     'Vehicle': '#e500b3',
     'Life & Entertainment': '#37a6cc',
     'Shopping': '#4c5efe',
     'Investments': '#f51a1c',
+    'Income': '#257f61',
+    'Transfer': '#848074'
   }
 }
 
