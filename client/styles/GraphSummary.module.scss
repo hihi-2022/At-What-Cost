@@ -1,0 +1,22 @@
+@import './global.scss';
+
+.graphButton {
+
+  display: block;
+  font-size: large;
+  height: 32px;
+  width: 4rem;
+  border-radius: 4px;
+  background-color: $bg-dark;
+  color: $bg-light;
+  padding: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background-color: $bg-light;
+    border: 2px solid $bg-dark;
+    color: $bg-dark;
+  }
+}

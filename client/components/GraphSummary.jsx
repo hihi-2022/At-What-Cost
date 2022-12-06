@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Legend, BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts'
+import style from '../styles/GraphSummary.module.scss'
 
 function constructBarChartData(incomeTotal, expenseTotals) {
   expenseTotals.sort((item1, item2) => item2.amount - item1.amount)
@@ -26,11 +27,13 @@ function constructBarChartData(incomeTotal, expenseTotals) {
 }
 
 function GraphSummary({ incomeTotal, expenseTotals }) {
+  const [graph, setGraph] = useState('pie')
   const [barChartData, bars] = constructBarChartData(incomeTotal, expenseTotals)
 
-  if (true) {
+  if (graph === 'bar') {
     return (
       <div style={{ width: '500px', height: '300px' }}>
+        <button onClick={() => { setGraph('pie') }} className={style.graphButton}>Pie</button>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={400}
@@ -43,32 +46,18 @@ function GraphSummary({ incomeTotal, expenseTotals }) {
               bottom: 5,
             }}
             >
-            {/* <Legend layout='vertical' align='right' verticalAlign='middle' /> */}
-            {/* <Tooltip /> */}
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
-            {/* <Tooltip /> */}
-            {/* <Legend /> */}
-            {/* <Bar dataKey="income" stackId="a" fill="#8884d8" />
-            <Bar dataKey="prev1" stackId="b" fill="none" />
-            <Bar dataKey="exp1" stackId="b" fill="red" />
-            <Bar dataKey="prev2" stackId="c" fill="none" />
-            <Bar dataKey="exp2" stackId="c" fill="orange" />
-            <Bar dataKey="prev3" stackId="d" fill="none" />
-            <Bar dataKey="exp3" stackId="d" fill="yellow" />
-            <Bar dataKey="prev4" stackId="e" fill="none" />
-            <Bar dataKey="exp4" stackId="e" fill="brown" />
-            <Bar dataKey="prev5" stackId="f" fill="none" />
-            <Bar dataKey="exp5" stackId="f" fill="grey" /> */}
-            {bars.map(item => <Bar dataKey={item.dataKey} stackId={item.stackId} fill={item.fill} />)}
+            {bars.map(item => <Bar dataKey={item.dataKey} stackId={item.stackId} fill={item.fill} key={item.dataKey} />)}
           </BarChart>
         </ResponsiveContainer>
       </div>
     )
-  } else {
+  } else if (graph === 'pie') {
     return (
       <div style={{ width: '500px', height: '300px' }}>
+        <button onClick={() => { setGraph('bar') }} className={style.graphButton}>Bar</button>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
             <Pie
