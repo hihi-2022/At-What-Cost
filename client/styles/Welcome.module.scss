@@ -46,6 +46,14 @@ h2 {
   padding-bottom: 15px;
 }
 
+.matrix {
+  margin-top: 10px;
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes expandWithShadow {
   0% {
 
