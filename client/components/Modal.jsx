@@ -37,6 +37,7 @@ function Modal() {
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
   const [user, setUser] = useState(null)
+  const [customCategory, setCustomCategory] = useState('')
 
   const categoryRef = useRef()
   const dispatch = useDispatch()
@@ -46,6 +47,10 @@ function Modal() {
       setUser(user)
     }
   })
+
+  const handleCustomCategoryChange = (e) => {
+    setCustomCategory(e.target.value)
+  }
 
   const handleFileChange = (e) => {
     setError('')
@@ -155,7 +160,12 @@ function Modal() {
         <form onSubmit={handleSubmit} className={style.category_form}>
           <div className={style.select_control}>
             <label htmlFor="category">Choose Category:</label>
-            <select ref={categoryRef} name="category" id="category">
+            <select
+              ref={categoryRef}
+              name="category"
+              id="category"
+              disabled={customCategory}
+            >
               {categories.map((category, index) => {
                 return (
                   <option key={index} value={category}>
@@ -165,6 +175,20 @@ function Modal() {
               })}
             </select>
           </div>
+
+          {user && (
+            <>
+              <div className={style.select_control}>
+                <label htmlFor="custom-category">Custom Category:</label>
+                <input
+                  type="text"
+                  placeholder="Type custom category"
+                  value={customCategory}
+                  onChange={handleCustomCategoryChange}
+                />
+              </div>
+            </>
+          )}
           <button type="submit">Add Filter</button>
         </form>
         <button className={style.cancel} onClick={cancel}>
