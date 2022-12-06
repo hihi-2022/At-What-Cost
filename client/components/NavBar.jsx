@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react'
 import style from '../styles/NavBar.module.scss'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from '../../firebase'
@@ -16,17 +18,17 @@ function NavBar() {
   const [ logo, setLogo ] = useState("At What Cost")
   const [ arrNum, setArrNum ] = useState(randomArrayNumber())
 
-  function randomArrayNumber()  {
+  function randomArrayNumber() {
     const number = Math.floor(Math.random() * logos.length)
     return number
   }
 
   function setLogoName(number) {
-     if(number === arrNum) {
-      if(logos.length - 1 === number) {
+    if (number === arrNum) {
+      if (logos.length - 1 === number) {
         setArrNum(0)
       } else {
-      setArrNum(number + 1)
+        setArrNum(number + 1)
       }
     } else {
       setArrNum(number)
