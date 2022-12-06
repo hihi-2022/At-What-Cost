@@ -1,5 +1,6 @@
 import React from 'react'
 import { ResponsiveContainer, PieChart, Pie, Tooltip, Legend } from 'recharts'
+import Example from './Example'
 
 function GraphSummary({ totals }) {
   return (
