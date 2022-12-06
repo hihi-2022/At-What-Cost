@@ -26,11 +26,11 @@ function TransactionItem({ transactionData, colours }) {
   })
 
   const addFilterHandler = () => {
-    dispatch(modalAddAction(transactionData.code))
+    dispatch(modalAddAction(transactionData.code, Math.sign(transactionData.amount)))
   }
 
   const editFilterHandler = () => {
-    dispatch(modalEditAction(transactionData.code))
+    dispatch(modalEditAction(transactionData.code, Math.sign(transactionData.amount)))
   }
 
   const deleteFilterHandler = () => {

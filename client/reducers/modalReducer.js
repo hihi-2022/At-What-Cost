@@ -12,9 +12,9 @@ function modalReducer(state = initialState, action) {
 
   switch (type) {
     case MODAL_ADD:
-      return { isAdd: true, isEdit: false, code: payload }
+      return { isAdd: true, isEdit: false, code: payload.code, sign: payload.sign }
     case MODAL_EDIT:
-      return { isAdd: false, isEdit: true, code: payload }
+      return { isAdd: false, isEdit: true, code: payload.code, sign: payload.sign }
     case MODAL_CSV: 
       return { isAdd: true, isEdit: false, code: payload, isCsv: true }
     case MODAL_HIDE:
