@@ -3,7 +3,7 @@ import { ResponsiveContainer, PieChart, Pie, Tooltip, Legend } from 'recharts'
 
 function GraphSummary({ expenseTotals }) {
   return (
-    <div style={{ width: '500px', height: '300px' }}>
+    <div style={{ width: '500px', height: '200px' }}>
       <ResponsiveContainer width="100%" height="100%">
         <PieChart width={400} height={400}>
           <Pie
@@ -15,7 +15,7 @@ function GraphSummary({ expenseTotals }) {
             cy="50%"
             outerRadius={80}
           />
-          <Legend layout='vertical' align='right' verticalAlign='middle'/>
+          <Legend layout="vertical" align="right" verticalAlign="middle" />
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>
