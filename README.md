@@ -1,5 +1,7 @@
 # At What Cost
 
+![screenshot of finance app](atwhatcost.jpg)
+
 A personal finance tool to help breakdown the cost of our expenses so that we can make informed decisions about how to handle our spending. The app allows users to upload a comma separated file to the app which is then processed and displayed as a list. Users can then add category filters to the transaction list items to gain a better understanding of where they are spending their money (e.g Food & Drink, Bills, Transportation, etc).
 
 ---
