@@ -11,7 +11,7 @@ function constructBarChartData(incomeTotal, expenseTotals) {
   }
 
   const bars = [
-    {dataKey: 'income', stackId: '0', fill: incomeTotal[0].fill}
+    { dataKey: 'income', stackId: '0', fill: incomeTotal[0].fill }
   ]
 
   for (let i = 0; i < expenseTotals.length; i++) {
@@ -30,26 +30,52 @@ function GraphSummary({ incomeTotal, expenseTotals }) {
   const [graph, setGraph] = useState('pie')
   const [barChartData, bars] = constructBarChartData(incomeTotal, expenseTotals)
 
-function GraphSummary({ expenseTotals }) {
-  return (
-    <div style={{ width: '500px', height: '200px' }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={400} height={400}>
-          <Pie
-            dataKey="amount"
-            nameKey="category"
-            isAnimationActive={false}
-            data={expenseTotals}
-            cx="50%"
-            cy="50%"
-            outerRadius={80}
-          />
-          <Legend layout="vertical" align="right" verticalAlign="middle" />
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
-    </div>
-  )
+  if (graph === 'bar') {
+    return (
+      <div style={{ width: '500px', height: '300px' }}>
+        <button onClick={() => { setGraph('pie') }} className={style.graphButton}>Pie</button>
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            width={400}
+            height={400}
+            data={barChartData}
+            margin={{
+              top: 20,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            {bars.map(item => <Bar dataKey={item.dataKey} stackId={item.stackId} fill={item.fill} key={item.dataKey} />)}
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    )
+  } else if (graph === 'pie') {
+    return (
+      <div style={{ width: '500px', height: '300px' }}>
+        <button onClick={() => { setGraph('bar') }} className={style.graphButton}>Bar</button>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart width={400} height={400}>
+            <Pie
+              dataKey="amount"
+              nameKey="category"
+              isAnimationActive={false}
+              data={expenseTotals}
+              cx="50%"
+              cy="50%"
+              outerRadius={80}
+            />
+            <Legend layout='vertical' align='right' verticalAlign='middle' />
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    )
+  }
 }
 
 export default GraphSummary
