@@ -10,6 +10,9 @@ import {
 } from '../actions'
 import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { app } from '../../firebase'
+import { addUserFilterAPI } from '../apis'
 
 const allowedExtensions = ['csv']
 
@@ -17,14 +20,22 @@ function Modal() {
   const categories = useSelector((state) => state.categories)
   const modalState = useSelector((state) => state.modal)
   const filters = useSelector((state) => state.filter)
+  const auth = getAuth(app)
 
   const { isAdd, isEdit, code, isCsv } = modalState
 
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
+  const [user, setUser] = useState(null)
 
   const categoryRef = useRef()
   const dispatch = useDispatch()
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user)
+    }
+  })
 
   const handleFileChange = (e) => {
     setError('')
@@ -60,7 +71,7 @@ function Modal() {
           date: obj.Date,
           code: obj.Code,
           type: obj.Type,
-          category: existingFilter ? existingFilter.code : '',
+          category: existingFilter ? existingFilter.category : '',
         }
       })
       dispatch(receiveTransactionsAction(filteredData))
@@ -68,9 +79,17 @@ function Modal() {
     dispatch(hideModalAction())
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+
     if (isAdd) {
+      if (user) {
+        await addUserFilterAPI(user.uid, [
+          ...filters,
+          { code, category: categoryRef.current.value },
+        ])
+      }
+
       dispatch(addFilterAction(code, categoryRef.current.value))
     } else {
       dispatch(editFilterAction(code, categoryRef.current.value))
