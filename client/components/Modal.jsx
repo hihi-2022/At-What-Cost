@@ -33,7 +33,7 @@ function Modal() {
   const filters = useSelector((state) => state.filter)
   const auth = getAuth(app)
 
-  const { isAdd, isEdit, code, isCsv } = modalState
+  const { isAdd, isEdit, code, isCsv, sign } = modalState
 
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
@@ -176,11 +176,19 @@ function Modal() {
               disabled={customCategory}
             >
               {categories.map((category, index) => {
-                return (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                )
+                if (sign <= 0 && category !== 'Income') {
+                  return (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  )
+                } else if (sign > 0 && (category === 'Income' || category === 'Transfer')) {
+                  return (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  )
+                }
               })}
             </select>
           </div>

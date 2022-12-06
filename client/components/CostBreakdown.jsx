@@ -14,7 +14,7 @@ function CostBreakdown({ totals }) {
     return (
       <div className={style.container}>
         <div className={style.graphSummary}>
-          <GraphSummary expenseTotals={expenseTotals} />
+          <GraphSummary incomeTotal={incomeTotal} expenseTotals={expenseTotals} />
         </div>
         <div>
           <CostSummary totals={expenseTotals} />
