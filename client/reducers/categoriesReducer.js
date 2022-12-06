@@ -1,5 +1,9 @@
 import { GET_CATEGORIES, RECEIVE_USER_CATEGORIES } from '../actions'
 
+const selectRandomColor = () => {
+  return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
+}
+
 const initialState = {
   list: [
     'Food & Drink',
@@ -35,7 +39,7 @@ function categoriesReducer(state = initialState, action) {
       return {
         ...state,
         list: [...state.list].concat(payload),
-        colourMap: { ...state.colourMap, [payload]: '#000000' },
+        colourMap: { ...state.colourMap, [payload]: selectRandomColor() },
       }
     default:
       return state
