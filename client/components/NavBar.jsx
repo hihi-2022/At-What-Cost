@@ -5,9 +5,21 @@ import { app } from '../../firebase'
 import TheButton from './TheButton'
 import { useDispatch } from 'react-redux'
 import { receieveUserFiltersThunk } from '../actions'
+import { useEffect } from 'react'
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [color, setcolor] = useState('#F2F2F2')
+
+  function changeColor () {
+    let maxVal = 0xFFFFFF; // 16777215.
+    let randomNumber = Math. random() * maxVal;
+    randomNumber = Math. floor(randomNumber);
+    randomNumber = randomNumber. toString(16);
+    let randColor = randomNumber. padStart(6, 0);
+    console.log("hello", randColor)
+    setcolor(`#${randColor}`)
+  }
 
   const auth = getAuth(app)
   const dispatch = useDispatch()
@@ -27,7 +39,7 @@ function NavBar() {
   return (
     <nav className={style.nav}>
       <div className={style.container}>
-        <h1>AWC</h1>
+        <h1 onClick={changeColor} style={{color: `${color}`, cursor: 'pointer'}}>AWC</h1>
         {isLoggedIn ? (
           <div className={style.navlinks}>
             <TheButton buttonWord={'Upload'} />
