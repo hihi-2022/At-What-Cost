@@ -15,9 +15,6 @@ export default [
     name: "At What Cost"
   },
   {
-    name: "AWC"
-  },
-  {
     name: "Avocado With Cheese"
   },
   {
@@ -68,4 +65,7 @@ export default [
   {
     name: "Aged Well Cheddar"
   },
+  {
+    name: "Azure Web Cloud"
+  }
 ]
