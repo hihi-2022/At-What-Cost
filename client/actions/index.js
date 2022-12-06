@@ -53,17 +53,17 @@ export function deleteFilterAction(code) {
   }
 }
 
-export function modalAddAction(code) {
+export function modalAddAction(code, sign) {
   return {
     type: MODAL_ADD,
-    payload: code,
+    payload: { code, sign }
   }
 }
 
-export function modalEditAction(code) {
+export function modalEditAction(code, sign) {
   return {
     type: MODAL_EDIT,
-    payload: code,
+    payload: { code, sign }
   }
 }
 
