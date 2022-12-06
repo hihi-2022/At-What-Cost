@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react'
 import style from '../styles/NavBar.module.scss'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from '../../firebase'
@@ -8,48 +10,48 @@ import { receieveUserFiltersThunk } from '../actions'
 
 const logos = [
   {
-    name: "AWS"
+    name: 'AWS',
   },
   {
-    name: "Actual Working Code"
+    name: 'Actual Working Code',
   },
   {
-    name: "Anti Working Culture"
+    name: 'Anti Working Culture',
   },
   {
-    name: "Any Way Cuz"
+    name: 'Any Way Cuz',
   },
   {
-    name: "At What Cost"
+    name: 'At What Cost',
   },
   {
-    name: "AWC"
+    name: 'AWC',
   },
   {
-    name: "Avocado With Cheese"
+    name: 'Avocado With Cheese',
   },
   {
-    name: "Ashley Welcomes Camels"
+    name: 'Ashley Welcomes Camels',
   },
 ]
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [color, setcolor] = useState('#F2F2F2')
-  const [ logo, setLogo ] = useState("AWC")
-  const [ arrNum, setArrNum ] = useState(randomArrayNumber())
+  const [logo, setLogo] = useState('AWC')
+  const [arrNum, setArrNum] = useState(randomArrayNumber())
 
-  function randomArrayNumber()  {
+  function randomArrayNumber() {
     const number = Math.floor(Math.random() * logos.length)
     return number
   }
 
   function setLogoName(number) {
-     if(number === arrNum) {
-      if(logos.length - 1 === number) {
+    if (number === arrNum) {
+      if (logos.length - 1 === number) {
         setArrNum(0)
       } else {
-      setArrNum(number + 1)
+        setArrNum(number + 1)
       }
     } else {
       setArrNum(number)
@@ -57,16 +59,16 @@ function NavBar() {
     setLogo(logos[arrNum].name)
   }
 
-  function changeColor () {
+  function changeColor() {
     let number = randomArrayNumber()
 
     setLogoName(number)
-    
-    let maxVal = 0xFFFFFF
-    let randomNumber = Math. random() * maxVal
-    randomNumber = Math. floor(randomNumber)
-    randomNumber = randomNumber. toString(16)
-    let randColor = randomNumber. padStart(6, 0)
+
+    let maxVal = 0xffffff
+    let randomNumber = Math.random() * maxVal
+    randomNumber = Math.floor(randomNumber)
+    randomNumber = randomNumber.toString(16)
+    let randColor = randomNumber.padStart(6, 0)
     setcolor(`#${randColor}`)
   }
 
@@ -88,7 +90,12 @@ function NavBar() {
   return (
     <nav className={style.nav}>
       <div className={style.container}>
-        <h1 onClick={changeColor} style={{color: `${color}`, cursor: 'pointer'}}>{logo}</h1>
+        <h1
+          onClick={changeColor}
+          style={{ color: `${color}`, cursor: 'pointer' }}
+        >
+          {logo}
+        </h1>
         {isLoggedIn ? (
           <div className={style.navlinks}>
             <TheButton buttonWord={'Upload'} />

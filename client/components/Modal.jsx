@@ -7,6 +7,7 @@ import {
   addFilterAction,
   editFilterAction,
   receiveTransactionsAction,
+  receieveUserCategoriesAction,
 } from '../actions'
 import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
@@ -37,6 +38,7 @@ function Modal() {
   const [error, setError] = useState('')
   const [file, setFile] = useState('')
   const [user, setUser] = useState(null)
+  const [customCategory, setCustomCategory] = useState('')
 
   const categoryRef = useRef()
   const dispatch = useDispatch()
@@ -46,6 +48,10 @@ function Modal() {
       setUser(user)
     }
   })
+
+  const handleCustomCategoryChange = (e) => {
+    setCustomCategory(e.target.value)
+  }
 
   const handleFileChange = (e) => {
     setError('')
@@ -95,12 +101,20 @@ function Modal() {
 
     if (isAdd) {
       if (user) {
-        await updateUserFiltersAPI(user.uid, [
-          ...filters,
-          { code, category: categoryRef.current.value },
-        ])
+        if (customCategory) {
+          dispatch(receieveUserCategoriesAction(customCategory))
+          dispatch(addFilterAction(code, customCategory))
+          dispatch(applyFilterAction(code, customCategory))
+          setCustomCategory('')
+        } else {
+          // If user selected from predefined categories list
+          await updateUserFiltersAPI(user.uid, [
+            ...filters,
+            { code, category: categoryRef.current.value },
+          ])
+          dispatch(addFilterAction(code, categoryRef.current.value))
+        }
       }
-      dispatch(addFilterAction(code, categoryRef.current.value))
     } else {
       if (user) {
         const updatedFilters = [...filters].map((item) => {
@@ -112,8 +126,8 @@ function Modal() {
         await updateUserFiltersAPI(user.uid, updatedFilters)
       }
       dispatch(editFilterAction(code, categoryRef.current.value))
+      dispatch(applyFilterAction(code, categoryRef.current.value))
     }
-    dispatch(applyFilterAction(code, categoryRef.current.value))
     dispatch(hideModalAction())
   }
 
@@ -155,7 +169,12 @@ function Modal() {
         <form onSubmit={handleSubmit} className={style.category_form}>
           <div className={style.select_control}>
             <label htmlFor="category">Choose Category:</label>
-            <select ref={categoryRef} name="category" id="category">
+            <select
+              ref={categoryRef}
+              name="category"
+              id="category"
+              disabled={customCategory}
+            >
               {categories.map((category, index) => {
                 if (sign <= 0 && category !== 'Income') {
                   return (
@@ -173,6 +192,20 @@ function Modal() {
               })}
             </select>
           </div>
+
+          {user && isAdd && (
+            <>
+              <div className={style.select_control}>
+                <label htmlFor="custom-category">Custom Category:</label>
+                <input
+                  type="text"
+                  placeholder="Type custom category"
+                  value={customCategory}
+                  onChange={handleCustomCategoryChange}
+                />
+              </div>
+            </>
+          )}
           <button type="submit">Add Filter</button>
         </form>
         <button className={style.cancel} onClick={cancel}>
