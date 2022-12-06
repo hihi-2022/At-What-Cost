@@ -10,7 +10,7 @@ export async function getUserFiltersAPI(uuid) {
   return filters
 }
 
-export async function addUserFilterAPI(uuid, filters) {
+export async function updateUserFiltersAPI(uuid, filters) {
   const db = getFirestore(app)
   const docRef = doc(db, 'users', uuid)
   const updatedFilters = { filters }

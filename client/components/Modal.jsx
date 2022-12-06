@@ -12,7 +12,7 @@ import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from '../../firebase'
-import { addUserFilterAPI } from '../apis'
+import { updateUserFiltersAPI } from '../apis'
 
 const allowedExtensions = ['csv']
 
@@ -81,17 +81,27 @@ function Modal() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const category = categoryRef.current.value
 
     if (isAdd) {
       if (user) {
-        await addUserFilterAPI(user.uid, [
+        await updateUserFiltersAPI(user.uid, [
           ...filters,
           { code, category: categoryRef.current.value },
         ])
       }
-
       dispatch(addFilterAction(code, categoryRef.current.value))
     } else {
+      if (user) {
+        const updatedFilters = [...filters].map((item) => {
+          if (item.code === code) {
+            return { code, category }
+          }
+          return item
+        })
+        console.log(updatedFilters)
+        await updateUserFiltersAPI(user.uid, updatedFilters)
+      }
       dispatch(editFilterAction(code, categoryRef.current.value))
     }
     dispatch(applyFilterAction(code, categoryRef.current.value))
