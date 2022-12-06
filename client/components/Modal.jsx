@@ -106,16 +106,15 @@ function Modal() {
           dispatch(addFilterAction(code, customCategory))
           dispatch(applyFilterAction(code, customCategory))
           setCustomCategory('')
-          return
+        } else {
+          // If user selected from predefined categories list
+          await updateUserFiltersAPI(user.uid, [
+            ...filters,
+            { code, category: categoryRef.current.value },
+          ])
+          dispatch(addFilterAction(code, categoryRef.current.value))
         }
-        // If user selected from predefined categories list
-        await updateUserFiltersAPI(user.uid, [
-          ...filters,
-          { code, category: categoryRef.current.value },
-        ])
       }
-
-      dispatch(addFilterAction(code, categoryRef.current.value))
     } else {
       if (user) {
         const updatedFilters = [...filters].map((item) => {
@@ -127,8 +126,8 @@ function Modal() {
         await updateUserFiltersAPI(user.uid, updatedFilters)
       }
       dispatch(editFilterAction(code, categoryRef.current.value))
+      dispatch(applyFilterAction(code, categoryRef.current.value))
     }
-    dispatch(applyFilterAction(code, categoryRef.current.value))
     dispatch(hideModalAction())
   }
 
