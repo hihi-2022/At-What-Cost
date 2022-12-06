@@ -185,7 +185,7 @@ function Modal() {
             </select>
           </div>
 
-          {user && (
+          {user && isAdd && (
             <>
               <div className={style.select_control}>
                 <label htmlFor="custom-category">Custom Category:</label>
