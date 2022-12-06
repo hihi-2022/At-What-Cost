@@ -7,6 +7,7 @@ import {
   addFilterAction,
   editFilterAction,
   receiveTransactionsAction,
+  receieveUserCategoriesAction,
 } from '../actions'
 import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
@@ -100,11 +101,20 @@ function Modal() {
 
     if (isAdd) {
       if (user) {
+        if (customCategory) {
+          dispatch(receieveUserCategoriesAction(customCategory))
+          dispatch(addFilterAction(code, customCategory))
+          dispatch(applyFilterAction(code, customCategory))
+          setCustomCategory('')
+          return
+        }
+        // If user selected from predefined categories list
         await updateUserFiltersAPI(user.uid, [
           ...filters,
           { code, category: categoryRef.current.value },
         ])
       }
+
       dispatch(addFilterAction(code, categoryRef.current.value))
     } else {
       if (user) {
