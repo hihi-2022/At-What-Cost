@@ -1,21 +1,45 @@
 import React, { useState, useEffect } from 'react'
 
 import style from '../styles/Welcome.module.scss'
-import { doseOfWisdom } from '../doseOfWisdom'
+import { doseOfWisdom } from '../bestAndWorstFinancialAdvice'
+import { badWisdom } from '../badWisdom'
 
 function Welcome() {
   const [wisdom, setWisdom] = useState({})
+  const [badWisdomNum, setBadWisdomNum] = useState(0)
+  const [goodWisdomNum, setGoodWisdomNum] = useState(0)
+  const [incrementNum, setIncrementNum] = useState(0)
+
+  function randomArrNum(arr) {
+    return Math.floor(Math.random() * arr.length)
+  }
+
+  function checkNumber() {
+    if (incrementNum % 2 === 0 ){
+      setWisdom(doseOfWisdom[randomArrNum(doseOfWisdom)])
+    } else if (incrementNum % 2 !== 0) {
+      setWisdom(badWisdom[randomArrNum(badWisdom)])
+    }
+    setIncrementNum(incrementNum+1)
+    console.log(incrementNum)
+  }
+
+  // useEffect(() => {
+  //   setIncrementNum(incrementNum + 1)
+  //   console.log(incrementNum)
+  // }, [wisdom])
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * doseOfWisdom.length)
-    setWisdom(doseOfWisdom[randomIndex])
+    setWisdom(doseOfWisdom[0]) 
+    
     const intervalId = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * doseOfWisdom.length)
-      setWisdom(doseOfWisdom[randomIndex])
-    }, 10000)
+      checkNumber()
+    }, 2000)
 
     return () => clearInterval(intervalId)
   }, [])
+
+
 
   return (
     <div className={style.page}>
@@ -33,20 +57,11 @@ function Welcome() {
         just sign up and we'll do it for you.
       </p>
       <div>
-        <div>
-          <h3>Finacial Wisdom</h3>
+          <h3>Quotes</h3>
           <p>
             {wisdom.quote} - {wisdom.author}
           </p>
         </div>
-
-        <div>
-          <h3>Best / Worse Advice</h3>
-          <p>
-            {wisdom.quote} - {wisdom.author}
-          </p>
-        </div>
-      </div>
     </div>
   )
 }
