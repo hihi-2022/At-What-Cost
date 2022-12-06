@@ -12,7 +12,7 @@ import {
 import { updateUserFiltersAPI } from '../apis'
 import { app } from '../../firebase'
 
-function TransactionItem({ transactionData }) {
+function TransactionItem({ transactionData, colours }) {
   const auth = getAuth(app)
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
@@ -46,10 +46,25 @@ function TransactionItem({ transactionData }) {
 
   return (
     <li>
-      <div>{transactionData.code}</div>
-      <div>${transactionData.amount * -1}</div>
+      <div className={style.date}>
+        {transactionData.date.toLocaleDateString('en-NZ', {})}
+      </div>
+      <div className={style.code}>{transactionData.code}</div>
+      <div className={style.category}>
+        {transactionData.category ? (
+          <div
+            className={style.categoryLabel}
+            style={{ backgroundColor: colours[transactionData.category] }}
+          >
+            {transactionData.category}
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+      <div className={style.amount}>${transactionData.amount * -1}</div>
       {transactionData.category ? (
-        <div>
+        <div className={style.buttons}>
           <button className={style.editButton} onClick={editFilterHandler}>
             Edit
           </button>
@@ -58,9 +73,11 @@ function TransactionItem({ transactionData }) {
           </button>
         </div>
       ) : (
-        <button className={style.addButton} onClick={addFilterHandler}>
-          Add
-        </button>
+        <div className={style.buttons}>
+          <button className={style.addButton} onClick={addFilterHandler}>
+            Add
+          </button>
+        </div>
       )}
     </li>
   )

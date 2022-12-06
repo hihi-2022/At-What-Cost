@@ -18,7 +18,7 @@ function Home() {
   }, [transactionsData])
   return (
     <>
-      {true ? (
+      {transactionsData.length !== 0 ? (
         <>
           <TransactionList />
           <CostBreakdown totals={totals} />
@@ -33,7 +33,7 @@ export default Home
 
 function computeTotals(categories, transactions) {
   const tally = {}
-  for (let category of categories) {
+  for (let category of categories.list) {
     tally[category] = 0
   }
   transactions?.forEach((item) => {
@@ -42,11 +42,11 @@ function computeTotals(categories, transactions) {
     }
   })
 
-  const totals = categories.map((item) => {
+  const totals = categories.list.map((item) => {
     return {
       category: item,
       amount: roundCents(tally[item]),
-      fill: `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`,
+      fill: categories.colourMap[item]
     }
   })
 

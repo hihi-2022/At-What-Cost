@@ -16,8 +16,18 @@ import { updateUserFiltersAPI } from '../apis'
 
 const allowedExtensions = ['csv']
 
+function getExtension(filename) {
+  const filenameParts = filename.split('.')
+  return filenameParts[filenameParts.length - 1]
+}
+
+function createDate(dateString) {
+  const [day, month, year] = dateString.split('/')
+  return new Date(`${month}/${day}/${year}`)
+}
+
 function Modal() {
-  const categories = useSelector((state) => state.categories)
+  const categories = useSelector((state) => state.categories.list)
   const modalState = useSelector((state) => state.modal)
   const filters = useSelector((state) => state.filter)
   const auth = getAuth(app)
@@ -43,7 +53,7 @@ function Modal() {
     if (e.target.files.length) {
       const inputFile = e.target.files[0]
 
-      const fileExtension = inputFile.type.split('/')[1]
+      const fileExtension = getExtension(inputFile.name)
       if (!allowedExtensions.includes(fileExtension)) {
         setError('Please input a csv file')
         return
@@ -68,7 +78,7 @@ function Modal() {
         )
         return {
           amount: Number(obj.Amount),
-          date: obj.Date,
+          date: createDate(obj.Date),
           code: obj.Code,
           type: obj.Type,
           category: existingFilter ? existingFilter.category : '',
@@ -132,7 +142,7 @@ function Modal() {
             />
             <button type="submit">Submit</button>
           </form>
-          <button>Cancel</button>
+          <button onClick={cancel}>Cancel</button>
         </div>
       </div>
     )

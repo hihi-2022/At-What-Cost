@@ -1,39 +1,67 @@
 li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date {
+  flex-basis: 15%;
+}
+
+.code {
+  flex-basis: 20%;
+}
+
+.category {
+  flex-basis: 30%;
+}
+
+.categoryLabel {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  width: fit-content;
+  color: white;
+}
+
+.amount {
+  flex-basis: 15%;
+}
+
+.buttons {
+  flex-basis: 20%;
 }
 
 li button {
-    border-radius: 50%;
-    cursor: pointer;
-    height: 3rem;
-    width: 3rem;
-    border: none;
-    color: #F2F2F2;
-    margin-left: 4px;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 3rem;
+  width: 3rem;
+  border: none;
+  color: #f2f2f2;
+  margin-left: 4px;
 }
-.deleteButton {
-    background-color: #FF1A1A ;
 
-    &:hover {
-        background-color: #d00606 ;
-    }
+.deleteButton {
+  background-color: #ff1a1a;
+
+  &:hover {
+    background-color: #d00606;
+  }
 }
 
 .editButton {
-    background-color: #F69400 ;
+  background-color: #f69400;
 
-    &:hover {
-        background-color: #fd7200;
-    }
+  &:hover {
+    background-color: #fd7200;
+  }
 }
 
 .addButton {
-    background-color: #008061;
+  background-color: #008061;
 
-    &:hover {
-        background-color: #1cb790;
-    }
+  &:hover {
+    background-color: #1cb790;
+  }
 }
-
