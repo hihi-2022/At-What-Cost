@@ -6,8 +6,11 @@ export async function getUserFiltersAPI(uuid) {
 
   const docRef = doc(db, 'users', uuid)
   const querySnapshot = await getDoc(docRef)
-  const { filters } = querySnapshot.data()
-  return filters
+  if (querySnapshot.exists()) {
+    const { filters } = querySnapshot.data()
+    return filters
+  }
+  return null
 }
 
 export async function updateUserFiltersAPI(uuid, filters) {

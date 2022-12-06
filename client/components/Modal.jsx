@@ -109,7 +109,6 @@ function Modal() {
           }
           return item
         })
-        console.log(updatedFilters)
         await updateUserFiltersAPI(user.uid, updatedFilters)
       }
       dispatch(editFilterAction(code, categoryRef.current.value))

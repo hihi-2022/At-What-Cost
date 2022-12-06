@@ -88,5 +88,7 @@ export function receiveFiltersAction(filters) {
 
 export const receieveUserFiltersThunk = (uuid) => async (dispatch) => {
   const userFilters = await getUserFiltersAPI(uuid)
-  dispatch(receiveFiltersAction(userFilters))
+  if (userFilters) {
+    dispatch(receiveFiltersAction(userFilters))
+  }
 }
