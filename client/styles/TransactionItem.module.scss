@@ -24,6 +24,16 @@ li {
   flex-basis: 33%;
 }
 
+.negative {
+  position: relative;
+
+  &:before {
+    content: '-';
+    position: absolute;
+    right: calc(100% + 5px);
+  }
+}
+
 .buttons {
   flex-basis: 33%;
   display: flex;

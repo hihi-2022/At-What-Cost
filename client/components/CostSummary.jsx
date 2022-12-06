@@ -12,7 +12,7 @@ function CostSummary({ totals }) {
 
   return (
     <div className={style.container}>
-      <h2 className={style.title}>Top 5 expenses</h2>
+      <h2 className={style.title}>Top Expenses</h2>
       <ol className={style.summaryList}>
         {topExpenses.map((item, index) => (
           <li className={style.itemList} key={item.category}>{`${index + 1}. ${
