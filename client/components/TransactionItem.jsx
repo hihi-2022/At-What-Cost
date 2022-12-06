@@ -62,7 +62,7 @@ function TransactionItem({ transactionData, colours }) {
           <div></div>
         )}
       </div>
-      <div className={style.amount}>${transactionData.amount * -1}</div>
+      <div className={style.amount}>${transactionData.amount}</div>
       {transactionData.category ? (
         <div className={style.buttons}>
           <button className={style.editButton} onClick={editFilterHandler}>
