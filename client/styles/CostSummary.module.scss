@@ -1,0 +1,28 @@
+@import './global.scss';
+
+.container {
+  padding: 40px;
+}
+
+.title {
+  color: $bg-dark;
+  border-bottom: 1px solid $bg-dark;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+
+  li {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    padding: 10px 0;
+  }
+
+  li + li {
+    border-top: 1px dashed $bg-grey;
+  }
+}

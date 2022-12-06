@@ -2,17 +2,17 @@
 
 .container {
   @include listBody;
+  padding-bottom: 10px;
 }
 
 .selectionForm {
-  padding-top: 30px;
+  margin: 10px 0;
   display: flex;
   justify-content: space-evenly;
 }
 
 .list {
-  height: 70vh;
-  max-height: 70vh;
+  height: calc(100% - 40px);
   width: 100%;
   overflow-y: auto;
   list-style: none;
