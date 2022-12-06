@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
-import style from '../styles/transactionItem.module.scss'
+import style from '../styles/TransactionItem.module.scss'
 import {
   deleteFilterAction,
   applyFilterAction,
