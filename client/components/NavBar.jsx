@@ -25,21 +25,43 @@ const logos = [
   {
     name: "AWC"
   },
+  {
+    name: "Avocado With Cheese"
+  },
+  {
+    name: "Ashley Welcomes Camels"
+  },
 ]
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [color, setcolor] = useState('#F2F2F2')
   const [ logo, setLogo ] = useState("AWC")
+  const [ arrNum, setArrNum ] = useState(randomArrayNumber())
 
-  function changeLogo() {
+  function randomArrayNumber()  {
     const number = Math.floor(Math.random() * logos.length)
-    setLogo(logos[number].name)
+    return number
+  }
+
+  function setLogoName(number) {
+     if(number === arrNum) {
+      if(logos.length - 1 === number) {
+        setArrNum(0)
+      } else {
+      setArrNum(number + 1)
+      }
+    } else {
+      setArrNum(number)
+    }
+    setLogo(logos[arrNum].name)
   }
 
   function changeColor () {
-    changeLogo()
+    let number = randomArrayNumber()
 
+    setLogoName(number)
+    
     let maxVal = 0xFFFFFF
     let randomNumber = Math. random() * maxVal
     randomNumber = Math. floor(randomNumber)
