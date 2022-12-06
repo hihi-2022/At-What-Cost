@@ -11,6 +11,7 @@ export const MODAL_EDIT = 'MODAL_EDIT'
 export const MODAL_HIDE = 'MODAL_HIDE'
 export const MODAL_CSV = 'MODAL_CSV'
 export const RECEIEVE_USER_FILTERS = 'RECEIEVE_USER_FILTERS'
+export const RECEIVE_USER_CATEGORIES = 'RECEIVE_USER_CATEGORIES'
 
 export function receiveTransactionsAction(transactions) {
   return {
@@ -90,5 +91,12 @@ export const receieveUserFiltersThunk = (uuid) => async (dispatch) => {
   const userFilters = await getUserFiltersAPI(uuid)
   if (userFilters) {
     dispatch(receiveFiltersAction(userFilters))
+  }
+}
+
+export function receieveUserCategoriesAction(categories) {
+  return {
+    type: RECEIVE_USER_CATEGORIES,
+    payload: categories,
   }
 }
