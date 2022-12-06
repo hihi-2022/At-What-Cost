@@ -50,7 +50,7 @@ function computeTotals(categories, transactions) {
     }
   })
 
-  return totals.filter((item) => item.amount > 0)
+  return totals.filter((item) => item.amount > 0 || item.category === 'Income')
 }
 
 function roundCents(amount) {

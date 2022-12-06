@@ -7,14 +7,17 @@ import style from '../styles/CostBreakdown.module.scss'
 function CostBreakdown({ totals }) {
   const filters = useSelector(globalState => globalState.filter)
 
+  const expenseTotals = totals.filter(item => item.category !== 'Income' && item.category !== 'Transfer')
+  const incomeTotal = totals.filter(item => item.category === 'Income')
+
   if(filters.length !== 0) {
     return (
       <div className={style.container}>
         <div className={style.graphSummary}>
-          <GraphSummary totals={totals} />
+          <GraphSummary incomeTotal={incomeTotal} expenseTotals={expenseTotals} />
         </div>
         <div>
-          <CostSummary totals={totals} />
+          <CostSummary totals={expenseTotals} />
         </div>
       </div>
     )

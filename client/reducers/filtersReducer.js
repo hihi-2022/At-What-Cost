@@ -1,11 +1,16 @@
-import { ADD_FILTER, DELETE_FILTER, EDIT_FILTER } from '../actions'
+import {
+  ADD_FILTER,
+  DELETE_FILTER,
+  EDIT_FILTER,
+  RECEIEVE_USER_FILTERS,
+} from '../actions'
 
 function filtersReducer(state = [], action) {
   const { type, payload } = action
 
   switch (type) {
     case ADD_FILTER:
-      if (state.find(item => item.code === payload.code)) {
+      if (state.find((item) => item.code === payload.code)) {
         return state
       } else {
         return [...state, payload]
@@ -26,6 +31,8 @@ function filtersReducer(state = [], action) {
         return item.code !== code
       })
     }
+    case RECEIEVE_USER_FILTERS:
+      return payload
     default:
       return state
   }

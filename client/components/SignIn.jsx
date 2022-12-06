@@ -7,9 +7,12 @@ import React, { useState, useEffect } from 'react'
 import style from '../styles/SignUp.module.scss'
 import { app } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { receieveUserFiltersThunk } from '../actions'
 
 function SignIn() {
   const auth = getAuth(app)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState({
     userEmail: '',
@@ -17,8 +20,9 @@ function SignIn() {
   })
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
+        dispatch(receieveUserFiltersThunk(user.uid))
         return navigate('/')
       }
     })

@@ -5,31 +5,40 @@ li {
 }
 
 .date {
-  flex-basis: 15%;
+  display: none;
 }
 
 .code {
-  flex-basis: 20%;
+  flex-basis: 33%;
 }
 
 .category {
-  flex-basis: 30%;
+  display: none;
 }
 
 .categoryLabel {
-  border-radius: 10px;
-  border: none;
-  padding: 10px;
-  width: fit-content;
-  color: white;
+  display: none;
 }
 
 .amount {
-  flex-basis: 15%;
+  flex-basis: 33%;
+}
+
+.negative {
+  position: relative;
+
+  &:before {
+    content: '-';
+    position: absolute;
+    right: calc(100% + 5px);
+  }
 }
 
 .buttons {
-  flex-basis: 20%;
+  flex-basis: 33%;
+  display: flex;
+  justify-content: end;
+  padding-right: 10px;
 }
 
 li button {
@@ -63,5 +72,38 @@ li button {
 
   &:hover {
     background-color: #1cb790;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .date {
+    display: block;
+    flex-basis: 15%;
+  }
+
+  .code {
+    flex-basis: 20%;
+  }
+
+  .category {
+    display: flex;
+    flex-basis: 30%;
+  }
+
+  .categoryLabel {
+    display: block;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    width: fit-content;
+    color: white;
+  }
+
+  .amount {
+    flex-basis: 15%;
+  }
+
+  .buttons {
+    flex-basis: 20%;
   }
 }
