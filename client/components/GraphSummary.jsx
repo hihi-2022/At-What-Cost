@@ -1,5 +1,5 @@
 import React from 'react'
-import { ResponsiveContainer, PieChart, Pie, Tooltip } from 'recharts'
+import { ResponsiveContainer, PieChart, Pie, Tooltip, Legend } from 'recharts'
 
 function GraphSummary({ totals }) {
   return (
@@ -14,9 +14,8 @@ function GraphSummary({ totals }) {
             cx="50%"
             cy="50%"
             outerRadius={80}
-            labelLine={false}
-            label={(item) => item.category}
           />
+          <Legend layout='vertical' align='right' verticalAlign='middle'/>
           <Tooltip />
         </PieChart>
       </ResponsiveContainer>
