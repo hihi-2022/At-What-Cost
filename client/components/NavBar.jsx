@@ -6,32 +6,7 @@ import TheButton from './TheButton'
 import { useDispatch } from 'react-redux'
 import { receieveUserFiltersThunk } from '../actions'
 
-const logos = [
-  {
-    name: "AWS"
-  },
-  {
-    name: "Actual Working Code"
-  },
-  {
-    name: "Anti Working Culture"
-  },
-  {
-    name: "Any Way Cuz"
-  },
-  {
-    name: "At What Cost"
-  },
-  {
-    name: "AWC"
-  },
-  {
-    name: "Avocado With Cheese"
-  },
-  {
-    name: "Ashley Welcomes Camels"
-  },
-]
+import logos from '../logos'
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
