@@ -1,7 +1,14 @@
 @import './global.scss';
 
-.graphButton {
+.chart_container {
+  position: relative;
+}
 
+.graphButton {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  left: 10px;
   display: block;
   font-size: large;
   height: 32px;

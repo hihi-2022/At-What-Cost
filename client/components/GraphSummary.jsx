@@ -1,5 +1,16 @@
 import React, { useState } from 'react'
-import { ResponsiveContainer, PieChart, Pie, Tooltip, Legend, BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts'
+import {
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Tooltip,
+  Legend,
+  BarChart,
+  Bar,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import style from '../styles/GraphSummary.module.scss'
 
 function constructBarChartData(incomeTotal, expenseTotals) {
@@ -7,12 +18,10 @@ function constructBarChartData(incomeTotal, expenseTotals) {
   const dataItem = {
     name: 'Income vs expenses',
     income: incomeTotal[0].amount,
-    'prev-0': incomeTotal[0].amount
+    'prev-0': incomeTotal[0].amount,
   }
 
-  const bars = [
-    { dataKey: 'income', stackId: '0', fill: incomeTotal[0].fill }
-  ]
+  const bars = [{ dataKey: 'income', stackId: '0', fill: incomeTotal[0].fill }]
 
   for (let i = 0; i < expenseTotals.length; i++) {
     const expenseItem = expenseTotals[i]
@@ -20,7 +29,11 @@ function constructBarChartData(incomeTotal, expenseTotals) {
     dataItem[expenseItem.category] = expenseItem.amount
 
     bars.push({ dataKey: `prev-${i + 1}`, stackId: `${i + 1}`, fill: 'none' })
-    bars.push({ dataKey: expenseItem.category, stackId: `${i + 1}`, fill: expenseItem.fill })
+    bars.push({
+      dataKey: expenseItem.category,
+      stackId: `${i + 1}`,
+      fill: expenseItem.fill,
+    })
   }
 
   return [[dataItem], bars]
@@ -32,8 +45,18 @@ function GraphSummary({ incomeTotal, expenseTotals }) {
 
   if (graph === 'bar') {
     return (
-      <div style={{ width: '500px', height: '300px' }}>
-        <button onClick={() => { setGraph('pie') }} className={style.graphButton}>Pie</button>
+      <div
+        style={{ width: '500px', height: '200px' }}
+        // className={style.chart_container}
+      >
+        <button
+          onClick={() => {
+            setGraph('pie')
+          }}
+          className={style.graphButton}
+        >
+          Pie
+        </button>
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={400}
@@ -49,15 +72,32 @@ function GraphSummary({ incomeTotal, expenseTotals }) {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
-            {bars.map(item => <Bar dataKey={item.dataKey} stackId={item.stackId} fill={item.fill} key={item.dataKey} />)}
+            {bars.map((item) => (
+              <Bar
+                dataKey={item.dataKey}
+                stackId={item.stackId}
+                fill={item.fill}
+                key={item.dataKey}
+              />
+            ))}
           </BarChart>
         </ResponsiveContainer>
       </div>
     )
   } else if (graph === 'pie') {
     return (
-      <div style={{ width: '500px', height: '300px' }}>
-        <button onClick={() => { setGraph('bar') }} className={style.graphButton}>Bar</button>
+      <div
+        style={{ width: '500px', height: '200px' }}
+        // className={style.chart_container}
+      >
+        <button
+          onClick={() => {
+            setGraph('bar')
+          }}
+          className={style.graphButton}
+        >
+          Bar
+        </button>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
             <Pie
@@ -69,7 +109,7 @@ function GraphSummary({ incomeTotal, expenseTotals }) {
               cy="50%"
               outerRadius={80}
             />
-            <Legend layout='vertical' align='right' verticalAlign='middle' />
+            <Legend layout="vertical" align="right" verticalAlign="middle" />
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>

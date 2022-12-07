@@ -2,6 +2,7 @@
 
 .container {
   @include listBody;
+  position: relative;
 }
 
 .graphSummary {
