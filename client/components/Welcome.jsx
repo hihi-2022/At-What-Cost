@@ -16,9 +16,9 @@ function Welcome() {
 
   function checkNumber(number) {
     if (number % 2 === 0){
-      setWisdom(doseOfWisdom[randomArrNum(doseOfWisdom)])
-    } else if (number % 2 !== 0) {
       setWisdom(badWisdom[randomArrNum(badWisdom)])
+    } else if (number % 2 !== 0) {
+      setWisdom(doseOfWisdom[randomArrNum(doseOfWisdom)])
     }
     console.log(number)
   }
