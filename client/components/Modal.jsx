@@ -113,7 +113,11 @@ function Modal() {
             { code, category: categoryRef.current.value },
           ])
           dispatch(addFilterAction(code, categoryRef.current.value))
+          dispatch(applyFilterAction(code, categoryRef.current.value))
         }
+      } else {
+        dispatch(addFilterAction(code, categoryRef.current.value))
+        dispatch(applyFilterAction(code, categoryRef.current.value))
       }
     } else {
       if (user) {
@@ -182,7 +186,10 @@ function Modal() {
                       {category}
                     </option>
                   )
-                } else if (sign > 0 && (category === 'Income' || category === 'Transfer')) {
+                } else if (
+                  sign > 0 &&
+                  (category === 'Income' || category === 'Transfer')
+                ) {
                   return (
                     <option key={index} value={category}>
                       {category}
