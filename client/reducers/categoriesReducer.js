@@ -35,12 +35,18 @@ function categoriesReducer(state = initialState, action) {
   switch (type) {
     case GET_CATEGORIES:
       return state
-    case RECEIVE_USER_CATEGORIES:
-      return {
-        ...state,
-        list: [...state.list].concat(payload),
-        colourMap: { ...state.colourMap, [payload]: selectRandomColor() },
+    case RECEIVE_USER_CATEGORIES: {
+      const exists = state.list.find((item) => item === payload)
+      if (exists) {
+        return state
+      } else {
+        return {
+          ...state,
+          list: [...state.list].concat(payload),
+          colourMap: { ...state.colourMap, [payload]: selectRandomColor() },
+        }
       }
+    }
     default:
       return state
   }

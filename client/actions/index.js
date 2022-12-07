@@ -57,14 +57,14 @@ export function deleteFilterAction(code) {
 export function modalAddAction(code, sign) {
   return {
     type: MODAL_ADD,
-    payload: { code, sign }
+    payload: { code, sign },
   }
 }
 
 export function modalEditAction(code, sign) {
   return {
     type: MODAL_EDIT,
-    payload: { code, sign }
+    payload: { code, sign },
   }
 }
 
@@ -94,9 +94,9 @@ export const receieveUserFiltersThunk = (uuid) => async (dispatch) => {
   }
 }
 
-export function receieveUserCategoriesAction(categories) {
+export function receieveUserCategoriesAction(category) {
   return {
     type: RECEIVE_USER_CATEGORIES,
-    payload: categories,
+    payload: category,
   }
 }
