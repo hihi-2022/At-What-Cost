@@ -23,6 +23,26 @@ const badWisdom = [
     quote: "It's always a possibility that you win the lotto",
     author: "Moo"
   },
+  {
+    quote: "Spend more money than you make.",
+    author: "Michael Reisch"
+  },
+  {
+    quote: "Don't take advice from a broke person.",
+    author: "Moo"
+  },
+  {
+    quote: "This investment has little to no risk.",
+    author: " Emily - Forbes Advisor"
+  },
+  {
+    quote: "You should refinance your house to pay down credit card debt",
+    author: "Web 3"
+  },
+  {
+    quote: "Don't buy a Tesla if you're making less than you make",
+    author: ""
+  },
 ]
 
 module.exports = { badWisdom }
