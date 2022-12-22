@@ -26,7 +26,6 @@ function transactionsListReducer(state = initialState, action) {
       for (let { code, category } of payload) {
         filterMap[code] = category
       }
-      console.log(filterMap)
       return state.map((item) => {
         item.category = filterMap[item.code] || ''
         return item
