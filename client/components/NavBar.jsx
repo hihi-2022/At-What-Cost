@@ -293,12 +293,13 @@ const get = async function () {
         <h1 onClick={changeLogo} style={{ color: `${color}`, cursor: 'pointer' }}>AWC - {logo}</h1>
         {isLoggedIn ? (
           <div className={style.navlinks}>
+            <TheButton buttonWord="Example Csv" clickFn={get}/>
             <TheButton buttonWord={'Upload'} />
             <TheButton buttonWord={'Logout'} clickFn={handleLogout} />
           </div>
         ) : (
           <div className={style.navlinks}>
-            <TheButton buttonWord="Download" clickFn={get}/>
+            <TheButton buttonWord="Example Csv" clickFn={get}/>
             <TheButton buttonWord="Sign In" />
             <TheButton buttonWord="Sign Up" />
             <TheButton buttonWord={'Upload'}/>
