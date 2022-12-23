@@ -22,6 +22,9 @@ function TheButton({ buttonWord, clickFn }) {
     if (buttonWord === 'Logout') {
       return clickFn()
     }
+    if (buttonWord === 'Example Csv') {
+      return clickFn()
+    }
   }
 
   return (
