@@ -8,205 +8,25 @@ import TheButton from './TheButton'
 import { useDispatch } from 'react-redux'
 import { receieveUserFiltersThunk } from '../actions'
 
+import { data } from '../data/exampleCsv'
 import logos from '../logos'
 
-const colours = ['#f69301', '#2c993e', '#8e01e6', '#e500b3', '#37a6cc', '#4c5efe', '#f51a1c', '#257f61']
-
-const data = [
-  {
-     "Type": "Visa Purchase",
-     "Details": "4835-****-****-5733 DF",
-     "Particulars":"",
-     "Code": "Big Barrel N",
-     "Reference": "",
-     "Amount": "-25.99",
-     "Date": "28/11/2022",
-     "ForeignCurrencyAmount": "",
-     "ConversionCharge": ""
-  },
-  {
-    "Type": "Visa Purchase",
-    "Details": "4835-****-****-5733 DF",
-    "Particulars":"",
-    "Code": "Big Barrel N",
-    "Reference": "",
-    "Amount": "-30.99",
-    "Date": "26/11/2022",
-    "ForeignCurrencyAmount": "",
-    "ConversionCharge": ""
- },
- {
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Big Barrel N",
-  "Reference": "",
-  "Amount": "-22.50",
-  "Date": "26/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "New World We",
-  "Reference": "",
-  "Amount": "-55.98",
-  "Date": "24/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "St Pierre'S",
-  "Reference": "",
-  "Amount": "-14.99",
-  "Date": "23/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "Joint Account",
-  "Particulars":"",
-  "Code": "St Pierre'S",
-  "Reference": "",
-  "Amount": "-18.99",
-  "Date": "20/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "New World We",
-  "Reference": "",
-  "Amount": "-150",
-  "Date": "20/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Farmers Porirua",
-  "Reference": "",
-  "Amount": "-32",
-  "Date": "20/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Countdown Ne",
-  "Reference": "",
-  "Amount": "-45.98",
-  "Date": "19/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Backdoor Lb",
-  "Reference": "",
-  "Amount": "-82",
-  "Date": "19/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Raglan Roast",
-  "Reference": "",
-  "Amount": "-5",
-  "Date": "19/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Raglan Roast",
-  "Reference": "",
-  "Amount": "-5",
-  "Date": "18/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Bp Connect A",
-  "Reference": "",
-  "Amount": "-250",
-  "Date": "18/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-}, 
-{
-  "Type": "Automatic Payment",
-  "Details": "Joint Account",
-  "Particulars":"",
-  "Code": "Rent & Expen",
-  "Reference": "",
-  "Amount": "-250",
-  "Date": "17/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Bp Connect A",
-  "Reference": "",
-  "Amount": "-100",
-  "Date": "13/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Visa Purchase",
-  "Details": "4835-****-****-5733 DF",
-  "Particulars":"",
-  "Code": "Two Degrees",
-  "Reference": "",
-  "Amount": "-28",
-  "Date": "13/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
-{
-  "Type": "Automatic Payment",
-  "Details": "Joint Account",
-  "Particulars":"",
-  "Code": "Rent & Expen",
-  "Reference": "",
-  "Amount": "-250",
-  "Date": "8/11/2022",
-  "ForeignCurrencyAmount": "",
-  "ConversionCharge": ""
-},
+const colours = [
+  '#f69301',
+  '#2c993e',
+  '#8e01e6',
+  '#e500b3',
+  '#37a6cc',
+  '#4c5efe',
+  '#f51a1c',
+  '#257f61',
 ]
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [color, setcolor] = useState('#F2F2F2')
-  const [ logo, setLogo ] = useState("At What Cost")
-  const [ arrNum, setArrNum ] = useState(randomArrayNumber())
+  const [logo, setLogo] = useState('At What Cost')
+  const [arrNum, setArrNum] = useState(randomArrayNumber())
 
   function randomArrayNumber() {
     const number = Math.floor(Math.random() * logos.length)
@@ -252,57 +72,53 @@ function NavBar() {
   }
 
   const download = function (data) {
- 
-    const blob = new Blob([data], { type: 'text/csv' });
- 
+    const blob = new Blob([data], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)
-
     const a = document.createElement('a')
- 
-    a.setAttribute('href', url)
- 
-    a.setAttribute('download', 'download.csv');
 
+    a.setAttribute('href', url)
+    a.setAttribute('download', 'download.csv')
     a.click()
-}
- 
-const csvmaker = function (data) {
- 
-    const csvRows = [];
-    
-    const headers = Object.keys(data[0]);
- 
-    csvRows.push(headers.join(','));
- 
+  }
+
+  const csvmaker = function (data) {
+    const csvRows = []
+    const headers = Object.keys(data[0])
+    csvRows.push(headers.join(','))
+
     data.forEach((item) => {
       csvRows.push(Object.values(item).join(','))
     })
- 
+
     return csvRows.join('\n')
-}
- 
-const get = async function () {
- 
-    const csvdata = csvmaker(data);
-    download(csvdata);
-}
+  }
+
+  const get = async function () {
+    const csvdata = csvmaker(data)
+    download(csvdata)
+  }
 
   return (
     <nav className={style.nav}>
       <div className={style.container}>
-        <h1 onClick={changeLogo} style={{ color: `${color}`, cursor: 'pointer' }}>AWC - {logo}</h1>
+        <h1
+          onClick={changeLogo}
+          style={{ color: `${color}`, cursor: 'pointer' }}
+        >
+          AWC - {logo}
+        </h1>
         {isLoggedIn ? (
           <div className={style.navlinks}>
-            <TheButton buttonWord="Example Csv" clickFn={get}/>
+            <TheButton buttonWord="Example Csv" clickFn={get} />
             <TheButton buttonWord={'Upload'} />
             <TheButton buttonWord={'Logout'} clickFn={handleLogout} />
           </div>
         ) : (
           <div className={style.navlinks}>
-            <TheButton buttonWord="Example Csv" clickFn={get}/>
+            <TheButton buttonWord="Example Csv" clickFn={get} />
             <TheButton buttonWord="Sign In" />
             <TheButton buttonWord="Sign Up" />
-            <TheButton buttonWord={'Upload'}/>
+            <TheButton buttonWord={'Upload'} />
           </div>
         )}
       </div>
