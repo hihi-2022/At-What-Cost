@@ -8,7 +8,7 @@ import style from '../styles/SignUp.module.scss'
 import { app } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { receieveUserFiltersThunk } from '../actions'
+import { deleteAllFiltersAction, receieveUserFiltersThunk } from '../actions'
 
 function SignIn() {
   const auth = getAuth(app)
@@ -22,6 +22,7 @@ function SignIn() {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
+        dispatch(deleteAllFiltersAction())
         dispatch(receieveUserFiltersThunk(user.uid))
         return navigate('/')
       }
@@ -59,7 +60,9 @@ function SignIn() {
             required
           />
         </div>
-        <button style={{cursor: 'pointer'}} type="submit">Sign In</button>
+        <button style={{ cursor: 'pointer' }} type="submit">
+          Sign In
+        </button>
       </form>
     </main>
   )

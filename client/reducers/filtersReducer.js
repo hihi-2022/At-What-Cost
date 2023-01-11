@@ -1,5 +1,6 @@
 import {
   ADD_FILTER,
+  DELETE_ALL_FILTERS,
   DELETE_FILTER,
   EDIT_FILTER,
   RECEIEVE_USER_FILTERS,
@@ -30,6 +31,9 @@ function filtersReducer(state = [], action) {
       return [...state].filter((item) => {
         return item.code !== code
       })
+    }
+    case DELETE_ALL_FILTERS: {
+      return []
     }
     case RECEIEVE_USER_FILTERS:
       return payload

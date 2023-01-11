@@ -1,4 +1,8 @@
-import { APPLY_FILTER, RECEIVE_TRANSACTIONS } from '../actions'
+import {
+  APPLY_ALL_FILTERS,
+  APPLY_FILTER,
+  RECEIVE_TRANSACTIONS,
+} from '../actions'
 
 const initialState = []
 
@@ -14,6 +18,16 @@ function transactionsListReducer(state = initialState, action) {
         if (item.code === code) {
           item.category = category
         }
+        return item
+      })
+    }
+    case APPLY_ALL_FILTERS: {
+      const filterMap = {}
+      for (let { code, category } of payload) {
+        filterMap[code] = category
+      }
+      return state.map((item) => {
+        item.category = filterMap[item.code] || ''
         return item
       })
     }
