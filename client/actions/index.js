@@ -1,4 +1,4 @@
-import { getUserFiltersAPI } from '../apis'
+import { getUserCustomCategoriesAPI, getUserFiltersAPI } from '../apis'
 
 export const RECEIVE_TRANSACTIONS = 'RECEIVE_TRANSACTIONS'
 export const APPLY_FILTER = 'APPLY_FILTER'
@@ -14,6 +14,8 @@ export const MODAL_HIDE = 'MODAL_HIDE'
 export const MODAL_CSV = 'MODAL_CSV'
 export const RECEIEVE_USER_FILTERS = 'RECEIEVE_USER_FILTERS'
 export const ADD_CUSTOM_CATEGORY = 'ADD_CUSTOM_CATEGORY'
+export const DELETE_CUSTOM_CATEGORY = 'DELETE_CUSTOM_CATEGORY'
+export const RECEIVE_USER_CUSTOM_CATEGORIES = 'RECEIVE_USER_CUSTOM_CATEGORIES'
 
 export function receiveTransactionsAction(transactions) {
   return {
@@ -114,5 +116,26 @@ export function addCustomCategoryAction(category, colour) {
   return {
     type: ADD_CUSTOM_CATEGORY,
     payload: { category, colour },
+  }
+}
+
+export function deleteCustomCategoryAction(category) {
+  return {
+    type: DELETE_CUSTOM_CATEGORY,
+    payload: category,
+  }
+}
+
+export function receiveCustomCategoriesAction(customCategories) {
+  return {
+    type: RECEIVE_USER_CUSTOM_CATEGORIES,
+    payload: customCategories,
+  }
+}
+
+export const receiveCustomCategoriesThunk = (uuid) => async (dispatch) => {
+  const customCategories = await getUserCustomCategoriesAPI(uuid)
+  if (customCategories) {
+    dispatch(receiveCustomCategoriesAction(customCategories))
   }
 }
