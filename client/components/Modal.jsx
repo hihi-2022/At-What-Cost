@@ -28,7 +28,9 @@ function createDate(dateString) {
 }
 
 function selectRandomColour() {
-  return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
+  return `#${Number(Math.floor(Math.random() * 0x1000000))
+    .toString(16)
+    .padStart(6, '0')}`
 }
 
 function Modal() {
@@ -106,25 +108,23 @@ function Modal() {
 
     if (isAdd) {
       if (user) {
+        let category
         if (customCategory) {
           const colour = selectRandomColour()
           await updateCustomCategoriesAPI(user.uid, [
             ...customCategories,
-            [customCategory, colour],
+            { category: customCategory, colour },
           ])
           dispatch(addCustomCategoryAction(customCategory, colour))
-          dispatch(addFilterAction(code, customCategory))
-          dispatch(applyFilterAction(code, customCategory))
           setCustomCategory('')
+          category = customCategory
         } else {
           // If user selected from predefined categories list
-          await updateUserFiltersAPI(user.uid, [
-            ...filters,
-            { code, category: categoryRef.current.value },
-          ])
-          dispatch(addFilterAction(code, categoryRef.current.value))
-          dispatch(applyFilterAction(code, categoryRef.current.value))
+          category = categoryRef.current.value
         }
+        await updateUserFiltersAPI(user.uid, [...filters, { code, category }])
+        dispatch(addFilterAction(code, category))
+        dispatch(applyFilterAction(code, category))
       } else {
         dispatch(addFilterAction(code, categoryRef.current.value))
         dispatch(applyFilterAction(code, categoryRef.current.value))
