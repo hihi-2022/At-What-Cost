@@ -8,14 +8,16 @@ import {
   applyFilterAction,
   modalAddAction,
   modalEditAction,
+  deleteCustomCategoryAction,
 } from '../actions'
-import { updateUserFiltersAPI } from '../apis'
+import { updateUserFiltersAPI, updateCustomCategoriesAPI } from '../apis'
 import { app } from '../../firebase'
 
 function TransactionItem({ transactionData, colours }) {
   const auth = getAuth(app)
   const dispatch = useDispatch()
   const filters = useSelector((state) => state.filter)
+  const customCategories = useSelector((state) => state.categories.custom)
 
   const [user, setUser] = useState(null)
 
@@ -26,14 +28,20 @@ function TransactionItem({ transactionData, colours }) {
   })
 
   const addFilterHandler = () => {
-    dispatch(modalAddAction(transactionData.code, Math.sign(transactionData.amount)))
+    dispatch(
+      modalAddAction(transactionData.code, Math.sign(transactionData.amount))
+    )
   }
 
   const editFilterHandler = () => {
-    dispatch(modalEditAction(transactionData.code, Math.sign(transactionData.amount)))
+    dispatch(
+      modalEditAction(transactionData.code, Math.sign(transactionData.amount))
+    )
   }
 
   const deleteFilterHandler = () => {
+    const category = transactionData.category
+
     dispatch(deleteFilterAction(transactionData.code))
     dispatch(applyFilterAction(transactionData.code, ''))
     if (user) {
@@ -41,6 +49,22 @@ function TransactionItem({ transactionData, colours }) {
         return item.code !== transactionData.code
       })
       updateUserFiltersAPI(user.uid, updatedFilters)
+
+      // If this is a custom category and no other filters are using it
+      // then we delete the category
+      const categoryStillUsed = updatedFilters.find((item) => {
+        return item.category === category
+      })
+      const isCustomCategory = customCategories.find((item) => {
+        return item.category === category
+      })
+      if (!categoryStillUsed && isCustomCategory) {
+        const updatedCustomCategories = customCategories.filter((item) => {
+          return item.category !== category
+        })
+        dispatch(deleteCustomCategoryAction(category))
+        updateCustomCategoriesAPI(user.uid, updatedCustomCategories)
+      }
     }
   }
 
