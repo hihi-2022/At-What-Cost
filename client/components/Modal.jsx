@@ -27,12 +27,13 @@ function createDate(dateString) {
   return new Date(`${month}/${day}/${year}`)
 }
 
-function selectRandomColor() {
+function selectRandomColour() {
   return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
 }
 
 function Modal() {
   const categories = useSelector((state) => state.categories.list)
+  const customCategories = useSelector((state) => state.categories.custom)
   const modalState = useSelector((state) => state.modal)
   const filters = useSelector((state) => state.filter)
   const auth = getAuth(app)
@@ -106,12 +107,12 @@ function Modal() {
     if (isAdd) {
       if (user) {
         if (customCategory) {
-          const color = selectRandomColor()
+          const colour = selectRandomColour()
           await updateCustomCategoriesAPI(user.uid, [
             ...customCategories,
-            [customCategory, color],
+            [customCategory, colour],
           ])
-          dispatch(addCustomCategoryAction(customCategory, color))
+          dispatch(addCustomCategoryAction(customCategory, colour))
           dispatch(addFilterAction(code, customCategory))
           dispatch(applyFilterAction(code, customCategory))
           setCustomCategory('')

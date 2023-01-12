@@ -1,6 +1,5 @@
 import { app } from '../../firebase'
 import { getFirestore, getDoc, setDoc, doc } from 'firebase/firestore'
-import { async } from '@firebase/util'
 
 export async function getUserFiltersAPI(uuid) {
   const db = getFirestore(app)
