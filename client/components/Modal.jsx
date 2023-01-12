@@ -13,7 +13,7 @@ import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from '../../firebase'
-import { updateUserFiltersAPI } from '../apis'
+import { updateCustomCategoriesAPI, updateUserFiltersAPI } from '../apis'
 
 const allowedExtensions = ['csv']
 
@@ -25,6 +25,10 @@ function getExtension(filename) {
 function createDate(dateString) {
   const [day, month, year] = dateString.split('/')
   return new Date(`${month}/${day}/${year}`)
+}
+
+function selectRandomColor() {
+  return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
 }
 
 function Modal() {
@@ -102,7 +106,12 @@ function Modal() {
     if (isAdd) {
       if (user) {
         if (customCategory) {
-          dispatch(addCustomCategoryAction(customCategory))
+          const color = selectRandomColor()
+          await updateCustomCategoriesAPI(user.uid, [
+            ...customCategories,
+            [customCategory, color],
+          ])
+          dispatch(addCustomCategoryAction(customCategory, color))
           dispatch(addFilterAction(code, customCategory))
           dispatch(applyFilterAction(code, customCategory))
           setCustomCategory('')
