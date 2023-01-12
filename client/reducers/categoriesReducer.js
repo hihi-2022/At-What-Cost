@@ -1,4 +1,4 @@
-import { GET_CATEGORIES, RECEIVE_USER_CATEGORIES } from '../actions'
+import { ADD_CUSTOM_CATEGORY, GET_CATEGORIES } from '../actions'
 
 const selectRandomColor = () => {
   return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
@@ -35,7 +35,7 @@ function categoriesReducer(state = initialState, action) {
   switch (type) {
     case GET_CATEGORIES:
       return state
-    case RECEIVE_USER_CATEGORIES: {
+    case ADD_CUSTOM_CATEGORY: {
       const exists = state.list.find((item) => item === payload)
       if (exists) {
         return state

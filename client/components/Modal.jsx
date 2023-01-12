@@ -7,7 +7,7 @@ import {
   addFilterAction,
   editFilterAction,
   receiveTransactionsAction,
-  receieveUserCategoriesAction,
+  addCustomCategoryAction,
 } from '../actions'
 import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
@@ -102,7 +102,7 @@ function Modal() {
     if (isAdd) {
       if (user) {
         if (customCategory) {
-          dispatch(receieveUserCategoriesAction(customCategory))
+          dispatch(addCustomCategoryAction(customCategory))
           dispatch(addFilterAction(code, customCategory))
           dispatch(applyFilterAction(code, customCategory))
           setCustomCategory('')

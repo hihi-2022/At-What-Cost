@@ -13,7 +13,7 @@ export const MODAL_EDIT = 'MODAL_EDIT'
 export const MODAL_HIDE = 'MODAL_HIDE'
 export const MODAL_CSV = 'MODAL_CSV'
 export const RECEIEVE_USER_FILTERS = 'RECEIEVE_USER_FILTERS'
-export const RECEIVE_USER_CATEGORIES = 'RECEIVE_USER_CATEGORIES'
+export const ADD_CUSTOM_CATEGORY = 'ADD_CUSTOM_CATEGORY'
 
 export function receiveTransactionsAction(transactions) {
   return {
@@ -110,9 +110,9 @@ export const receieveUserFiltersThunk = (uuid) => async (dispatch) => {
   }
 }
 
-export function receieveUserCategoriesAction(category) {
+export function addCustomCategoryAction(category) {
   return {
-    type: RECEIVE_USER_CATEGORIES,
+    type: ADD_CUSTOM_CATEGORY,
     payload: category,
   }
 }
