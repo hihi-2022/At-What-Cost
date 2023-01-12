@@ -110,9 +110,9 @@ export const receieveUserFiltersThunk = (uuid) => async (dispatch) => {
   }
 }
 
-export function addCustomCategoryAction(category) {
+export function addCustomCategoryAction(category, colour) {
   return {
     type: ADD_CUSTOM_CATEGORY,
-    payload: category,
+    payload: { category, colour },
   }
 }

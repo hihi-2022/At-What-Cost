@@ -1,8 +1,8 @@
 import { ADD_CUSTOM_CATEGORY, GET_CATEGORIES } from '../actions'
 
-const selectRandomColor = () => {
-  return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
-}
+// const selectRandomColor = () => {
+//   return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
+// }
 
 const initialState = {
   list: [
@@ -27,6 +27,7 @@ const initialState = {
     Income: '#257f61',
     Transfer: '#848074',
   },
+  custom: [],
 }
 
 function categoriesReducer(state = initialState, action) {
@@ -36,14 +37,16 @@ function categoriesReducer(state = initialState, action) {
     case GET_CATEGORIES:
       return state
     case ADD_CUSTOM_CATEGORY: {
-      const exists = state.list.find((item) => item === payload)
+      const { category, colour } = payload
+      const exists = state.list.find((item) => item === category)
       if (exists) {
         return state
       } else {
         return {
           ...state,
-          list: [...state.list].concat(payload),
-          colourMap: { ...state.colourMap, [payload]: selectRandomColor() },
+          list: [...state.list].concat(category),
+          colourMap: { ...state.colourMap, [category]: colour },
+          custom: [...state.custom].concat(category),
         }
       }
     }
