@@ -5,10 +5,6 @@ import {
   RECEIVE_USER_CUSTOM_CATEGORIES,
 } from '../actions'
 
-// const selectRandomColor = () => {
-//   return `#${Number(Math.floor(Math.random() * 0x1000000)).toString(16)}`
-// }
-
 const initialState = {
   list: [
     'Food & Drink',
