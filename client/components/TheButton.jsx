@@ -25,6 +25,9 @@ function TheButton({ buttonWord, clickFn }) {
     if (buttonWord === 'Example Csv') {
       return clickFn()
     }
+    if (buttonWord === 'CLEAR Firestore') {
+      return clickFn()
+    }
   }
 
   return (

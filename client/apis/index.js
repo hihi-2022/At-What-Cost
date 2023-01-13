@@ -38,3 +38,9 @@ export async function updateCustomCategoriesAPI(uuid, customCategories) {
   const updatedCustomCategories = { customCategories }
   await setDoc(docRef, updatedCustomCategories, { merge: true })
 }
+
+export async function clearAllDataAPI(uuid) {
+  const db = getFirestore(app)
+  const docRef = doc(db, 'users', uuid)
+  await setDoc(docRef, {})
+}

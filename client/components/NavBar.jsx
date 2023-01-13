@@ -13,6 +13,7 @@ import {
 
 import { data } from '../data/exampleCsv'
 import logos from '../logos'
+import { clearAllDataAPI } from '../apis'
 
 const colours = [
   '#f69301',
@@ -27,6 +28,7 @@ const colours = [
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
   const [color, setcolor] = useState('#F2F2F2')
   const [logo, setLogo] = useState('At What Cost')
   const [arrNum, setArrNum] = useState(randomArrayNumber())
@@ -59,11 +61,16 @@ function NavBar() {
     setcolor(colours[randomIdx])
   }
 
+  async function clearFirestoreData() {
+    await clearAllDataAPI(user.uid)
+  }
+
   const auth = getAuth(app)
   const dispatch = useDispatch()
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setIsLoggedIn(true)
+      setUser(user)
       dispatch(receiveCustomCategoriesThunk(user.uid))
       dispatch(receieveUserFiltersThunk(user.uid))
     } else {
@@ -113,6 +120,10 @@ function NavBar() {
         </h1>
         {isLoggedIn ? (
           <div className={style.navlinks}>
+            <TheButton
+              buttonWord="CLEAR Firestore"
+              clickFn={clearFirestoreData}
+            />
             <TheButton buttonWord="Example Csv" clickFn={get} />
             <TheButton buttonWord={'Upload'} />
             <TheButton buttonWord={'Logout'} clickFn={handleLogout} />
