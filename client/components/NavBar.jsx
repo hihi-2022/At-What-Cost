@@ -63,6 +63,9 @@ function NavBar() {
 
   async function clearFirestoreData() {
     await clearAllDataAPI(user.uid)
+    alert(
+      'User data cleared in Firestore. But NOT in Redux - refresh browser now please.'
+    )
   }
 
   const auth = getAuth(app)
