@@ -24,7 +24,6 @@ function Welcome() {
     } else if (number % 2 !== 0) {
       setWisdom(doseOfWisdom[randomArrNum(doseOfWisdom)])
     }
-    console.log(number)
   }
 
   useEffect(() => {

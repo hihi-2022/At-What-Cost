@@ -34,12 +34,7 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const credentials = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    )
-    console.log(credentials.user)
+    await createUserWithEmailAndPassword(auth, email, password)
   }
 
   return (
@@ -59,7 +54,9 @@ function SignUp() {
             required
           />
         </div>
-        <button style={{cursor: 'pointer'}}type="submit">Sign Up</button>
+        <button style={{ cursor: 'pointer' }} type="submit">
+          Sign Up
+        </button>
       </form>
     </main>
   )
