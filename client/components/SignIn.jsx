@@ -39,8 +39,7 @@ function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const credentials = await signInWithEmailAndPassword(auth, email, password)
-    console.log(credentials.user)
+    await signInWithEmailAndPassword(auth, email, password)
   }
 
   return (
