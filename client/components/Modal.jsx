@@ -7,13 +7,13 @@ import {
   addFilterAction,
   editFilterAction,
   receiveTransactionsAction,
-  receieveUserCategoriesAction,
+  addCustomCategoryAction,
 } from '../actions'
 import style from '../styles/Modal.module.scss'
 import Papa from 'papaparse'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from '../../firebase'
-import { updateUserFiltersAPI } from '../apis'
+import { updateCustomCategoriesAPI, updateUserFiltersAPI } from '../apis'
 
 const allowedExtensions = ['csv']
 
@@ -27,8 +27,15 @@ function createDate(dateString) {
   return new Date(`${month}/${day}/${year}`)
 }
 
+function selectRandomColour() {
+  return `#${Number(Math.floor(Math.random() * 0x1000000))
+    .toString(16)
+    .padStart(6, '0')}`
+}
+
 function Modal() {
   const categories = useSelector((state) => state.categories.list)
+  const customCategories = useSelector((state) => state.categories.custom)
   const modalState = useSelector((state) => state.modal)
   const filters = useSelector((state) => state.filter)
   const auth = getAuth(app)
@@ -101,20 +108,23 @@ function Modal() {
 
     if (isAdd) {
       if (user) {
+        let category
         if (customCategory) {
-          dispatch(receieveUserCategoriesAction(customCategory))
-          dispatch(addFilterAction(code, customCategory))
-          dispatch(applyFilterAction(code, customCategory))
+          const colour = selectRandomColour()
+          await updateCustomCategoriesAPI(user.uid, [
+            ...customCategories,
+            { category: customCategory, colour },
+          ])
+          dispatch(addCustomCategoryAction(customCategory, colour))
           setCustomCategory('')
+          category = customCategory
         } else {
           // If user selected from predefined categories list
-          await updateUserFiltersAPI(user.uid, [
-            ...filters,
-            { code, category: categoryRef.current.value },
-          ])
-          dispatch(addFilterAction(code, categoryRef.current.value))
-          dispatch(applyFilterAction(code, categoryRef.current.value))
+          category = categoryRef.current.value
         }
+        await updateUserFiltersAPI(user.uid, [...filters, { code, category }])
+        dispatch(addFilterAction(code, category))
+        dispatch(applyFilterAction(code, category))
       } else {
         dispatch(addFilterAction(code, categoryRef.current.value))
         dispatch(applyFilterAction(code, categoryRef.current.value))

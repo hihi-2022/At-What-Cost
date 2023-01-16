@@ -6,7 +6,10 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { app } from '../../firebase'
 import TheButton from './TheButton'
 import { useDispatch } from 'react-redux'
-import { receieveUserFiltersThunk } from '../actions'
+import {
+  receieveUserFiltersThunk,
+  receiveCustomCategoriesThunk,
+} from '../actions'
 
 import { data } from '../data/exampleCsv'
 import logos from '../logos'
@@ -61,6 +64,7 @@ function NavBar() {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       setIsLoggedIn(true)
+      dispatch(receiveCustomCategoriesThunk(user.uid))
       dispatch(receieveUserFiltersThunk(user.uid))
     } else {
       setIsLoggedIn(false)

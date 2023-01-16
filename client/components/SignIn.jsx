@@ -8,7 +8,11 @@ import style from '../styles/SignUp.module.scss'
 import { app } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { deleteAllFiltersAction, receieveUserFiltersThunk } from '../actions'
+import {
+  deleteAllFiltersAction,
+  receieveUserFiltersThunk,
+  receiveCustomCategoriesThunk,
+} from '../actions'
 
 function SignIn() {
   const auth = getAuth(app)
@@ -22,6 +26,7 @@ function SignIn() {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
+        dispatch(receiveCustomCategoriesThunk(user.uid))
         dispatch(deleteAllFiltersAction())
         dispatch(receieveUserFiltersThunk(user.uid))
         return navigate('/')

@@ -54,10 +54,10 @@ function Welcome() {
         At What Cost is a financial tracking website you can use to visualise
         your bank transactions and sort them into categories. It&apos;s so easy
         to use, just go to the upload button and give us a csv file from your
-        bank and watch the magic happen. If you want us to hold your saved
-        categories, just sign up and we&apos;ll do it for you. You can also try
-        out this site using sample data, just click on the &quot;Example
-        CSV&quot; button to download a csv file of sample data.
+        bank and watch the magic happen. If you want us to save your filters,
+        just sign up and we&apos;ll do that for you. You can also try out this
+        site using sample data, just click on the &quot;Example CSV&quot; button
+        to download a csv file of sample data.
       </p>
       <div className={style.matrix}>
         {quote % 2 === 0 ? <h3>Red Pill</h3> : <h3>Blue Pill</h3>}
